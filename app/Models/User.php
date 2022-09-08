@@ -33,4 +33,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function playlists() {
+        return $this->hasMany(Playlist::class, 'playlist_id', 'id');
+    }
 }

@@ -12,4 +12,5 @@ class contient_morceau extends Model
     public $timestamps = false;
 
     protected $guarded = [];
+    
 }

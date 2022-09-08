@@ -12,4 +12,14 @@ class playlist extends Model
     public $timestamps = false;
 
     protected $guarded = [];
+
+    public function users() {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function contientVersion_morceaus() {
+        return $this->belongsToMany(Playlist::class, 'contient_morceau', 'playlist_id', 'version_morceau_id');
+    }
+
+
 }
