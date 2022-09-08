@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('name')
                 ->index()
                 ->nullable();
-            $table->string('prenom')
+            $table->string('first_name')
                 ->nullable();
             $table->date('date_naissance');
             $table->date('date_deces')
