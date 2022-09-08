@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('groupes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name')
+                ->index();
+            $table->string('nationalite')
+                ->index();
+            $table->integer('date_creation')
+                ->nullable();
+            // $table->timestamps();
         });
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('genre_version_morceaus', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

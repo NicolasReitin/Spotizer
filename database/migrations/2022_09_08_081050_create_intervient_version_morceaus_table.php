@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('intervient_version_morceaus', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('role')
+                ->nullable();
+            // $table->timestamps();
         });
     }
 

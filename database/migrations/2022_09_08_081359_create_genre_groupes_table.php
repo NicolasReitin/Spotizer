@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('genre_groupes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

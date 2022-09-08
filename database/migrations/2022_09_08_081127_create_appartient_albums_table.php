@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('appartient_albums', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('numero_piste')
+                ->nullable();
+            // $table->timestamps();
         });
     }
 

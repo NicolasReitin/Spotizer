@@ -15,7 +15,15 @@ return new class extends Migration
     {
         Schema::create('version_morceaus', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('titre')
+                ->index();
+            $table->integer('duree_secondes')
+                ->index();
+            $table->string('filepath');
+            $table->string('extension');
+
+            
+            // $table->timestamps();
         });
     }
 
