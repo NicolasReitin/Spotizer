@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('genre_albums', function (Blueprint $table) {
             $table->id();
+            $table->foreignId(column: 'genre_id')->constrained(table: 'genre')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId(column: 'album_id')->constrained(table: 'album')->onUpdate('cascade')->onDelete('cascade');
             // $table->timestamps();
         });
     }

@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('genre_version_morceaus', function (Blueprint $table) {
             $table->id();
+            $table->foreignId(column: 'genre_id')->constrained(table: 'genre')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId(column: 'version_morceau_id')->constrained(table: 'version_morceau')->onUpdate('cascade')->onDelete('cascade');
             // $table->timestamps();
         });
     }
