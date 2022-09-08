@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class contient_morceau extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
+    protected $guarded = [];
 }

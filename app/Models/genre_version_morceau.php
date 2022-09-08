@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class genre_version_morceau extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
+    protected $guarded = [];
 }
