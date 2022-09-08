@@ -1,0 +1,57 @@
+
+*{
+    background: #000000 ;
+}
+
+.imageWelcome{
+    text-align: center;
+
+    img{
+        margin-top: 10%;
+    }
+}
+
+
+body{
+    nav{
+        
+    }
+    .logo{
+        width: 100px;
+    }
+    .navMenu{
+        ul{
+            list-style-type: none;
+        }
+        a{
+            text-decoration: none;
+            color: whitesmoke;
+            font-size: 25px;
+            margin-right: 20px;
+
+            &:hover{
+                color: white;
+                text-decoration: underline;
+            }
+        }
+    }
+    .navbar{
+        position: fixed;
+        right: 10px;
+
+        
+
+        a{
+            text-decoration: none;
+            color: whitesmoke;
+            font-size: 25px;
+            margin-right: 20px;
+    
+            &:hover{
+                color: white;
+                text-decoration: underline;
+            }
+        }
+    }
+    
+}
