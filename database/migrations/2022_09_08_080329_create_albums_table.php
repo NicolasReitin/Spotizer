@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('titre')
                 ->index();
             $table->integer('date_de_sortie');
+            $table->foreignId(column: 'groupe_id')->constrained(table: 'groupes')->onUpdate('cascade')->onDelete('cascade');
             // $table->timestamps();
         });
     }
