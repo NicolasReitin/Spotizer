@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('est_membres', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(column: 'artiste_id')->constrained(table: 'artiste')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId(column: 'groupe_id')->constrained(table: 'groupe')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId(column: 'artiste_id')->constrained(table: 'artistes')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId(column: 'groupe_id')->constrained(table: 'groupes')->onUpdate('cascade')->onDelete('cascade');
             // $table->timestamps();
         });
     }

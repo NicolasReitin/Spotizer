@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('contient_morceaus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(column: 'version_morceau_id')->constrained(table: 'version_morceau')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId(column: 'playlist_id')->constrained(table: 'playlist')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId(column: 'playlist_id')->constrained(table: 'playlists')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId(column: 'version_morceau_id')->constrained(table: 'version_morceaus')->onUpdate('cascade')->onDelete('cascade');
             // $table->timestamps();
         });
     }

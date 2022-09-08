@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('genre_groupes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(column: 'genre_id')->constrained(table: 'genre')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId(column: 'groupe_id')->constrained(table: 'groupe')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId(column: 'genre_id')->constrained(table: 'genres')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId(column: 'groupe_id')->constrained(table: 'groupes')->onUpdate('cascade')->onDelete('cascade');
             // $table->timestamps();
         });
     }
