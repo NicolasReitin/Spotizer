@@ -18,7 +18,7 @@ class playlist extends Model
     }
 
     public function contientVersion_morceaus() {
-        return $this->belongsToMany(Playlist::class, 'contient_morceau', 'playlist_id', 'version_morceau_id');
+        return $this->belongsToMany(Playlist::class, 'contient_morceau', 'playlist_id', 'version_morceau_id')->withPivot('titre','duree_secondes','filepath','extension' );
     }
 
 
