@@ -35,7 +35,7 @@
                     <div class="navMenuRight">
                         <ul>
                             @auth
-                                <li><a href="{{ url('/home') }}">Home</a></li>
+                            <li><a href="{{ url('/home') }}">Accueil</a></li>
                             @else
                                 <li><a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a></li>
         
