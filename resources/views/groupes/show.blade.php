@@ -23,7 +23,7 @@
                     <div class="imageCentral cover">
                         <img src="{{ $album->cover }}" alt="">
                     </div>
-                    <p>{{ $album->titre }} ({{ $album->date_de_sortie }})</p>
+                    <p><b>{{ $album->titre }}</b> ({{ $album->date_de_sortie }})</p>
                 </div>
                 @endforeach
             </div>

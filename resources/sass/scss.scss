@@ -1,3 +1,66 @@
+*{
+    color: whitesmoke;
+    background-color: #202020;
+}
+//------------------------------Navbar---------------------------
+
+.imageWelcome{
+    text-align: center;
+
+    img{
+        margin-top: 5%;
+    }
+}
+
+nav{
+    
+}
+.logo{
+    width: 150px;
+}
+.navMenu{
+    display: flex;
+    justify-content: space-between;
+    .navMenuLeft{
+        display: flex;
+    }
+    ul{
+        list-style-type: none;
+        display: flex;
+    }
+    a{
+        text-decoration: none;
+        color: whitesmoke;
+        font-size: 25px;
+        margin-right: 20px;
+
+        &:hover{
+            color: white;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+    }
+}
+.navbarWelcome{
+    position: relative;
+    right: 10px;
+
+    a{
+        text-decoration: none;
+        color: whitesmoke;
+        font-size: 25px;
+        margin-right: 20px;
+
+        &:hover{
+            color: white;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+    }
+}
+
+
+
 //----------------------------Index-----------------------------
 .main{
     margin-left: 5%;
@@ -5,7 +68,6 @@
 }
 .titre{
     text-align: center;
-    color: whitesmoke;
 }
 
 .cards{
@@ -47,8 +109,17 @@
 .showPage{
 
     .main{
-        color: whitesmoke;
-        text-align: center;
+        .showText{
+            p{
+                text-align: center;
+            }
+        }
+        h3{
+            margin-left: 5%;
+            margin-bottom: 30px;
+        }
+        
+        
         .imageShow{
             display: flex;
             justify-content: center;
@@ -76,6 +147,8 @@
     
 
 //----------------------------Create-----------------------------
+
+
 
 
 

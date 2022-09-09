@@ -39,7 +39,14 @@ class GroupeController extends Controller
      */
     public function store(StoregroupeRequest $request)
     {
-        //
+        $all_params = [];
+        $all_params['name'] = $request->name;
+        $all_params['nationalite'] = $request->nationalite;
+        $all_params['date_creation'] = $request->date_creation;
+        $all_params['photo'] = $request->photo;
+        // dd($all_params);
+        Groupe::create($all_params);
+        return redirect('groupes/index');
     }
 
     /**
