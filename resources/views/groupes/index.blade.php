@@ -11,20 +11,20 @@
         </div>
         <div class="cards gap-5 mt-5">
             @foreach ($groupes as $groupe)
-            <div class="card" style="width: 280px; background-color: #151515">
-                <div class="imageCard">
-                    <img src="{{ $groupe->photo }}" alt="Photo de {{ $groupe->name }}">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title"><b>{{ $groupe->name }}</b></h3>
-                    {{-- <p class="card-text mt-2">Date de création : {{ $groupe->date_creation }} 
-                        <br>Nationalité : {{ $groupe->nationalite }} 
-                    </p> --}}
-                </div>
-                <div class="boutonCentral">
-                    <a href="{{ route('groupes.show', ['groupe' => $groupe]) }}"><button class="btn btn-outline-warning">Plus d'infos</button></a>
-                </div>
-            </div>            
+            <a href="{{ route('groupes.show', ['groupe' => $groupe]) }}">
+                <div class="card cardHover">
+                    <div class="imageCard">
+                        <img src="{{ $groupe->photo }}" alt="Photo de {{ $groupe->name }}">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title"><b>{{ $groupe->name }}</b></h3>
+                    </div>
+                </div>  
+            </a>
+                    {{-- <div class="boutonCentral">
+                        <a href="{{ route('groupes.show', ['groupe' => $groupe]) }}"><button class="btn btn-outline-warning">Plus d'infos</button></a>
+                    </div> --}}
+                          
             @endforeach
         </div>
     </div>

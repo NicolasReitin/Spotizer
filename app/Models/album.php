@@ -14,7 +14,7 @@ class album extends Model
     protected $guarded = [];
 
     public function appartientVersion_morceaus() {
-        return $this->belongsToMany(Version_morceau::class, 'appartient_album', 'album_id', 'version_morceau_id')->withPivot('titre', 'duree_secondes', 'filepath', 'extension');
+        return $this->belongsToMany(Version_morceau::class, 'appartient_album', 'album_id', 'version_morceau_id');
     }
 
     public function produitGroupes() {
@@ -22,6 +22,6 @@ class album extends Model
     }
 
     public function albumsGenres() {
-        return $this->belongsToMany(Genre::class, 'genre_album', 'album_id', 'genre_id')->withPivot('genre');
+        return $this->belongsToMany(Genre::class, 'genre_album', 'album_id', 'genre_id');
     }
 }

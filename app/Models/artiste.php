@@ -14,14 +14,14 @@ class artiste extends Model
     protected $guarded = [];
 
     public function intervientVersion_morceaus() {
-        return $this->belongsToMany(Version_morceau::class, 'intervient_version_morceau', 'artiste_id', 'version_morceau_id')->withPivot('titre', 'duree_secondes', 'filepath', 'extension');
+        return $this->belongsToMany(Version_morceau::class, 'intervient_version_morceau', 'artiste_id', 'version_morceau_id');
     }
 
     public function artistesGenres() {
-        return $this->belongsToMany(Genre::class, 'genre_artiste', 'artiste_id', 'genre_id')->withPivot('genre');
+        return $this->belongsToMany(Genre::class, 'genre_artiste', 'artiste_id', 'genre_id');
     }
 
     public function membreGroupes() {
-        return $this->belongsToMany(Groupe::class, 'est_membre', 'artiste_id', 'groupe_id')->withPivot('name', 'nationalite', 'date_creation', 'photo');
+        return $this->belongsToMany(Groupe::class, 'est_membre', 'artiste_id', 'groupe_id');
     }
 }

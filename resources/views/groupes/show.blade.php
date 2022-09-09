@@ -30,9 +30,11 @@
             <div class="casting gap-4">
                 @foreach ($artistes as $artiste)
                 <div class="artistes">
-                    <div class="imageCentral">
-                        <img src="{{ $artiste->photo }}" alt="">
-                    </div>
+                    <a href="">
+                        <div class="imageCentral">
+                            <img class="photoCircle" src="{{ $artiste->photo }}" alt="">
+                        </div>
+                    </a>
                     <p><b>{{ $artiste->pseudo }}</b></p>
                 </div>
                 @endforeach
@@ -43,10 +45,14 @@
             <div class="discographie gap-4">
                 @foreach ($albums as $album)
                 <div class="albums">
-                    <div class="imageCentral">
-                        <img src="{{ $album->cover }}" alt="">
+                    <div class="cardHover">
+                    <a href="{{ route('albums.show', ['album' =>$album]) }}">
+                        <div class="imageCentral">
+                            <img src="{{ $album->cover }}" alt="{{ $album->titre }}">
+                        </div>
+                    </a>
+                    <p><b>{{ $album->titre }}</b><br> {{ $album->date_de_sortie }}</p>
                     </div>
-                    <p><b>{{ $album->titre }}</b> ({{ $album->date_de_sortie }})</p>
                 </div>
                 @endforeach
             </div>

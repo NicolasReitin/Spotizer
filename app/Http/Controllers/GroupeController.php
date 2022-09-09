@@ -19,7 +19,6 @@ class GroupeController extends Controller
     public function index()
     {
         return view('groupes.index', ['groupes' => Groupe::all()]);
-        dd('groupes');
     }
 
     /**

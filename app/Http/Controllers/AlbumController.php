@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\album;
+use App\Models\Groupe;
 use App\Http\Requests\StorealbumRequest;
 use App\Http\Requests\UpdatealbumRequest;
 
@@ -15,7 +16,7 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
+        return view('albums.index', ['albums' => Album::all()] );
     }
 
     /**
@@ -25,7 +26,8 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        //
+        $groupes = Groupe::all();
+        return view('albums.create', ['groupes' => $groupes]);
     }
 
     /**
@@ -36,7 +38,14 @@ class AlbumController extends Controller
      */
     public function store(StorealbumRequest $request)
     {
-        //
+        $all_params = [];
+        $all_params['titre'] = $request->titre;
+        $all_params['groupe_id'] = $request->groupe_id;
+        $all_params['date_de_sortie'] = $request->date_de_sortie;
+        $all_params['cover'] = $request->cover;
+        // dd($all_params);
+        Album::create($all_params);
+        return redirect('albums/index');
     }
 
     /**
@@ -47,7 +56,7 @@ class AlbumController extends Controller
      */
     public function show(album $album)
     {
-        //
+        return view('albums.show', ['album' => $album]);
     }
 
     /**
@@ -81,6 +90,7 @@ class AlbumController extends Controller
      */
     public function destroy(album $album)
     {
-        //
+        $album->delete();
+        return redirect('albums/index');
     }
 }

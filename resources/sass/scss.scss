@@ -1,6 +1,9 @@
 *{
     color: whitesmoke;
-    background-color: #202020;
+    
+}
+body{
+    background-color: #151515;
 }
 //------------------------------Navbar---------------------------
 
@@ -76,14 +79,23 @@ nav{
     justify-content: center;
     flex-wrap: wrap;
 
+    a{
+        text-decoration: none;
+    }
+
     .card{
+        background-color: #181818;
         border: none;
+        width: 280px;
+
 
         .imageCard{
             display: flex;
             justify-content: center;
 
             img{
+                margin-top: 5%;
+                border-radius: 2%;
                 text-align: center;
                 background-color: #151515;
                 width: 250px;
@@ -96,15 +108,33 @@ nav{
         }
     }
 }
+//----------------------------Commun-----------------------------
 
 .boutonCentral{
     display: flex;
     justify-content: center;
+    margin-bottom: 5%;
 }
 
 .imageCentral{
     display: flex;
     justify-content: center;
+}
+
+.cardHover{
+    background-color: #181818;
+    border-radius: 2%;
+    border: none;
+    padding: 5%;
+
+        &:hover{
+            transition: ease-in-out 0.3s;
+            background-color: #252525;
+        }
+}
+
+.photoCircle{
+    border-radius: 50%;
 }
 
 //----------------------------Show-----------------------------
@@ -141,6 +171,11 @@ nav{
                     width: 200px;
                     height: 200px;
                 }
+                p{
+                    margin-top: 5%;
+                    font-size: 20px;
+                    text-align: center;
+                }
             }
         }
         .discographie{
@@ -150,9 +185,10 @@ nav{
             flex-wrap: wrap;
             
             .albums{
-                
+                width: 220px;
                 img{
                     width: 200px;
+                    border-radius: 2%;
                 }
             }
         }

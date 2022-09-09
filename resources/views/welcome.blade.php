@@ -27,7 +27,7 @@
                         <a href=""><img class="logo ms-5" src="{{ asset('assets/images/logo.png') }}" alt="logo spotizer"></a> 
                         <ul>
                             <li><a href="{{ route('groupes.index') }}">Groupes</a></li>
-                            <li><a href="">Albums</a></li>
+                            <li><a href="{{ route('albums.index') }}">Albums</a></li>
                             <li><a href="">Artistes</a></li>
                             <li><a href="">Playlist</a></li>
                         </ul>
