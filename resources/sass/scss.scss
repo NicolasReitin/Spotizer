@@ -1,0 +1,47 @@
+//----------------------------Index-----------------------------
+.main{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.titre{
+    text-align: center;
+    color: whitesmoke;
+}
+
+.cards{
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .card{
+        .imageCard{
+            display: flex;
+            justify-content: center;
+
+            img{
+                text-align: center;
+                background-color: #151515;
+                width: 250px;
+                height: 220px;
+            }
+        }
+        
+        .card-title{
+            text-align: center;
+        }
+    }
+}
+
+.boutonCentral{
+    display: flex;
+    justify-content: center;
+}
+
+//----------------------------Show-----------------------------
+
+
+//----------------------------Create-----------------------------
+
+
+

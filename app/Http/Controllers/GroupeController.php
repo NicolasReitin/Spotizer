@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\groupe;
+use App\Models\Groupe;
 use App\Http\Requests\StoregroupeRequest;
 use App\Http\Requests\UpdategroupeRequest;
 
@@ -15,7 +15,8 @@ class GroupeController extends Controller
      */
     public function index()
     {
-        //
+        return view('groupes.index', ['groupes' => Groupe::all()]);
+        dd('groupes');
     }
 
     /**
@@ -47,7 +48,7 @@ class GroupeController extends Controller
      */
     public function show(groupe $groupe)
     {
-        //
+        return view('groupes.show', ['groupe' => $groupe]);
     }
 
     /**
