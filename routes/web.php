@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroupeController;
+use App\Http\Controllers\ArtisteController;
+use App\Http\Controllers\AlbumController;
+
 
 /*
 |--------------------------------------------------------------------------

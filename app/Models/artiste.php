@@ -22,6 +22,6 @@ class artiste extends Model
     }
 
     public function membreGroupes() {
-        return $this->belongsToMany(Groupe::class, 'est_membre', 'artiste_id', 'groupe_id')->withPivot('name', 'nationalite', 'date_creation');
+        return $this->belongsToMany(Groupe::class, 'est_membre', 'artiste_id', 'groupe_id')->withPivot('name', 'nationalite', 'date_creation', 'photo');
     }
 }

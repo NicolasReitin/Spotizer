@@ -119,8 +119,8 @@ nav{
         h3{
             margin-left: 5%;
             margin-bottom: 30px;
+            margin-top: 30px;
         }
-        
         
         .imageShow{
             display: flex;
@@ -130,15 +130,27 @@ nav{
                 width: 450px;
             }
         }
+        .casting{
+            margin-left: 5%;
+            margin-right: 5%;
+            display: flex;
+            flex-wrap: wrap;
+
+            .artistes{
+                img{
+                    width: 200px;
+                    height: 200px;
+                }
+            }
+        }
         .discographie{
             margin-left: 5%;
             margin-right: 5%;
             display: flex;
             flex-wrap: wrap;
-            .album{
-                .cover{
-                    
-                }
+            
+            .albums{
+                
                 img{
                     width: 200px;
                 }

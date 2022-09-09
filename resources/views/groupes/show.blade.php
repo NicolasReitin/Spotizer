@@ -26,18 +26,31 @@
                 </form>
             </div>
 
+            <h3><b>Artistes</b></h3>
+            <div class="casting gap-4">
+                @foreach ($artistes as $artiste)
+                <div class="artistes">
+                    <div class="imageCentral">
+                        <img src="{{ $artiste->photo }}" alt="">
+                    </div>
+                    <p><b>{{ $artiste->pseudo }}</b></p>
+                </div>
+                @endforeach
+            </div>
+
 
             <h3><b>Discographie</b></h3>
-            <div class="discographie d-flex gap-4">
+            <div class="discographie gap-4">
                 @foreach ($albums as $album)
-                <div class="album">
-                    <div class="imageCentral cover">
+                <div class="albums">
+                    <div class="imageCentral">
                         <img src="{{ $album->cover }}" alt="">
                     </div>
                     <p><b>{{ $album->titre }}</b> ({{ $album->date_de_sortie }})</p>
                 </div>
                 @endforeach
             </div>
+
             <div class="boutonCentral mt-2">
                 <a href="{{ route('groupes.index') }}"><button class="btn btn-outline-warning ">Retour à l'accueil</button></a>
             </div>

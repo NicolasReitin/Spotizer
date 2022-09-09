@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Groupe;
+use App\Models\Artiste;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoregroupeRequest;
 use App\Http\Requests\UpdategroupeRequest;
@@ -58,7 +59,8 @@ class GroupeController extends Controller
     public function show(groupe $groupe)
     {
         $albums = $groupe->produitAlbums()->orderBy('date_de_sortie', 'asc')->get();
-        return view('groupes.show', ['groupe' => $groupe, 'albums' => $albums ]);
+        $artistes = $groupe->membreArtistes;
+        return view('groupes.show', ['groupe' => $groupe, 'albums' => $albums, "artistes" => $artistes ]);
     }
 
     /**
