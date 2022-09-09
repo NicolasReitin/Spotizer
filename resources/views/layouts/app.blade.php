@@ -22,15 +22,15 @@
         @if (Route::has('login'))
             <nav class="d-flex">
                 
-                <div class="navMenu">
+                <div class="navMenu mt-4">
                     <div class="navMenuLeft">
                         <a href="{{ url('/') }}"><img class="logo ms-5" src="{{ asset('assets/images/logo.png') }}" alt="logo spotizer"></a> 
                         <ul>
-                            <li><a href="{{ url('/') }}">Home</a></li>
+                            <li><a href="">Titres</a></li>
+                            <li><a href="">Playlist</a></li>
                             <li><a href="{{ route('groupes.index') }}">Groupes</a></li>
                             <li><a href="{{ route('albums.index') }}">Albums</a></li>
                             <li><a href="">Artistes</a></li>
-                            <li><a href="">Playlist</a></li>
                         </ul>
                     </div>
                     <div class="navMenuRight">

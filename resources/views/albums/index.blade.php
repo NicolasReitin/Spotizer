@@ -9,18 +9,20 @@
         <div class="boutonCentral mt-5">
             <a href="{{ route('albums.create') }}"><button class="btn btn-outline-light ">Créer un nouveau album</button></a>
         </div>
-        <div class="cards gap-5 mt-5">
+        <div class="cards">
             @foreach ($albums as $album)
             <a href="{{ route('albums.show', ['album' => $album]) }}">
-                <div class="card">
+                <div class="card cardHover">
                     <div class="imageCard">
                         <img src="{{ $album->cover }}" alt="Photo de {{ $album->name }}">
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title"><b>{{ $album->titre }}</b><br> <a href="{{ route('groupes.show', ['groupe' => $album->produitGroupes->id]) }}" style="text-decoration: none"><span style="font-size: 15px">({{ $album->produitGroupes->name }})</span></a></h3>
+                        <h4 class="card-title"><b>{{ $album->titre }}</b><br>
+                            <span style="color: grey">{{ $album->produitGroupes->name }}</span>
+                        </h4>
                     </div>
-                </div>   
-            </a>         
+                </div>  
+            </a>                     
             @endforeach
         </div>
     </div>

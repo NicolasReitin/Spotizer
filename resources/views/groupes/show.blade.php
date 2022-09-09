@@ -26,36 +26,40 @@
                 </form>
             </div>
 
-            <h3><b>Artistes</b></h3>
-            <div class="casting gap-4">
-                @foreach ($artistes as $artiste)
-                <div class="artistes">
-                    <a href="">
-                        <div class="imageCentral">
-                            <img class="photoCircle" src="{{ $artiste->photo }}" alt="">
-                        </div>
-                    </a>
-                    <p><b>{{ $artiste->pseudo }}</b></p>
-                </div>
-                @endforeach
-            </div>
-
-
-            <h3><b>Discographie</b></h3>
-            <div class="discographie gap-4">
-                @foreach ($albums as $album)
-                <div class="albums">
-                    <div class="cardHover">
-                    <a href="{{ route('albums.show', ['album' =>$album]) }}">
-                        <div class="imageCentral">
-                            <img src="{{ $album->cover }}" alt="{{ $album->titre }}">
-                        </div>
-                    </a>
-                    <p><b>{{ $album->titre }}</b><br> {{ $album->date_de_sortie }}</p>
+            <div class="blocArtiste">
+                <h3><b>Artistes</b></h3>
+                <div class="casting gap-4">
+                    @foreach ($artistes as $artiste)
+                    <div class="artistes">
+                        <a href="">
+                            <div class="imageCentral">
+                                <img class="photoCircle" src="{{ $artiste->photo }}" alt="">
+                            </div>
+                        </a>
+                        <p><b>{{ $artiste->pseudo }}</b></p>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
+
+            <div class="blocDisco mt-5">
+                <h3><b>Discographie</b></h3>
+                <div class="discographie gap-4">
+                    @foreach ($albums as $album)
+                    <div class="albums">
+                        <div class="cardHover">
+                        <a href="{{ route('albums.show', ['album' =>$album]) }}">
+                            <div class="imageCentral">
+                                <img src="{{ $album->cover }}" alt="{{ $album->titre }}">
+                            </div>
+                        </a>
+                        <p><b>{{ $album->titre }}</b><br> {{ $album->date_de_sortie }}</p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            
 
             <div class="boutonCentral mt-2">
                 <a href="{{ route('groupes.index') }}"><button class="btn btn-outline-warning ">Retour à l'accueil</button></a>

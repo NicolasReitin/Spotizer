@@ -9,7 +9,7 @@
         <div class="boutonCentral mt-5">
             <a href="{{ route('groupes.create') }}"><button class="btn btn-outline-light ">Créer un nouveau groupe</button></a>
         </div>
-        <div class="cards gap-5 mt-5">
+        <div class="cards">
             @foreach ($groupes as $groupe)
             <a href="{{ route('groupes.show', ['groupe' => $groupe]) }}">
                 <div class="card cardHover">
@@ -17,13 +17,10 @@
                         <img src="{{ $groupe->photo }}" alt="Photo de {{ $groupe->name }}">
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title"><b>{{ $groupe->name }}</b></h3>
+                        <h4 class="card-title"><b>{{ $groupe->name }}</b></h4>
                     </div>
                 </div>  
             </a>
-                    {{-- <div class="boutonCentral">
-                        <a href="{{ route('groupes.show', ['groupe' => $groupe]) }}"><button class="btn btn-outline-warning">Plus d'infos</button></a>
-                    </div> --}}
                           
             @endforeach
         </div>

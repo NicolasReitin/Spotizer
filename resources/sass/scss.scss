@@ -22,6 +22,7 @@ nav{
     width: 150px;
 }
 .navMenu{
+    width: 100%;
     display: flex;
     justify-content: space-between;
     .navMenuLeft{
@@ -75,9 +76,14 @@ nav{
 
 .cards{
     color: whitesmoke;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    // display: flex;
+    // justify-content: start;
+    // flex-wrap: wrap;
+    margin-left: 5%;
+    display: grid;
+    gap: 100px !important;
+    grid-template-columns: repeat(auto-fill, 250px);
+    grid-template-rows: repeat(auto-fill, 1fr);
 
     a{
         text-decoration: none;
@@ -146,7 +152,7 @@ nav{
                 text-align: center;
             }
         }
-        h3{
+        h4{
             margin-left: 5%;
             margin-bottom: 30px;
             margin-top: 30px;
