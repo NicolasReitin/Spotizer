@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
 use App\Models\Groupe;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoregroupeRequest;
 use App\Http\Requests\UpdategroupeRequest;
 
@@ -26,7 +28,7 @@ class GroupeController extends Controller
      */
     public function create()
     {
-        //
+        return view('groupes.create');
     }
 
     /**
@@ -48,7 +50,8 @@ class GroupeController extends Controller
      */
     public function show(groupe $groupe)
     {
-        return view('groupes.show', ['groupe' => $groupe]);
+        $albums = $groupe->produitAlbums()->orderBy('date_de_sortie', 'asc')->get();
+        return view('groupes.show', ['groupe' => $groupe, 'albums' => $albums ]);
     }
 
     /**

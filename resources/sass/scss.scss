@@ -38,8 +38,42 @@
     justify-content: center;
 }
 
-//----------------------------Show-----------------------------
+.imageCentral{
+    display: flex;
+    justify-content: center;
+}
 
+//----------------------------Show-----------------------------
+.showPage{
+
+    .main{
+        color: whitesmoke;
+        text-align: center;
+        .imageShow{
+            display: flex;
+            justify-content: center;
+            
+            img{
+                width: 450px;
+            }
+        }
+        .discographie{
+            margin-left: 5%;
+            margin-right: 5%;
+            display: flex;
+            flex-wrap: wrap;
+            .album{
+                .cover{
+                    
+                }
+                img{
+                    width: 200px;
+                }
+            }
+        }
+    }
+}
+    
 
 //----------------------------Create-----------------------------
 
