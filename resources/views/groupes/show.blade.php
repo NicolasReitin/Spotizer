@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="titre">
-        <h1><b>{{ $groupe->name }}</b></h1>
+        <h1 style="font-size: 50px"><b>{{ $groupe->name }}</b></h1>
     </div>
     <div class="showPage mt-5">
         <div class="main">
@@ -15,6 +15,17 @@
                     <br>Nationalité : {{ $groupe->nationalite }}
                 </p>
             </div>
+            <div class="boutonCentral mt-2 gap-4">
+                <a href="{{ route('groupes.edit', ['groupe' => $groupe]) }}"><button class="btn btn-outline-warning ">Modifier</button></a>
+                
+                <form action="{{ route('groupes.delete', ['groupe' => $groupe]) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <input type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce groupe?')" value="Supprimer">
+                    {{-- <a href=""><button class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce groupe?')">Supprimer</button></a> --}}
+                </form>
+            </div>
+
 
             <h3><b>Discographie</b></h3>
             <div class="discographie d-flex gap-4">

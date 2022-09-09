@@ -69,7 +69,7 @@ class GroupeController extends Controller
      */
     public function edit(groupe $groupe)
     {
-        //
+        return view('groupes.edit', ['groupe' => $groupe]);
     }
 
     /**
@@ -81,7 +81,12 @@ class GroupeController extends Controller
      */
     public function update(UpdategroupeRequest $request, groupe $groupe)
     {
-        //
+        $groupe->name = $request->get('name');
+        $groupe->nationalite = $request->get('nationalite');
+        $groupe->date_creation = $request->get('date_creation');
+        $groupe->photo = $request->get('photo');
+        $groupe->save();
+        return redirect('groupes/index'); 
     }
 
     /**
@@ -92,6 +97,7 @@ class GroupeController extends Controller
      */
     public function destroy(groupe $groupe)
     {
-        //
+        $groupe->delete();
+        return redirect('groupes/index');
     }
 }

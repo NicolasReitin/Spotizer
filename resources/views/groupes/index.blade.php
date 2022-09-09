@@ -7,7 +7,7 @@
     </div>
     <div class="main">
         <div class="boutonCentral mt-5">
-            <a href="{{ route('groupes.create') }}"><button class="btn btn-outline-secondary ">Créer un nouveau groupe</button></a>
+            <a href="{{ route('groupes.create') }}"><button class="btn btn-outline-light ">Créer un nouveau groupe</button></a>
         </div>
         <div class="cards gap-5 mt-5">
             @foreach ($groupes as $groupe)
