@@ -26,7 +26,7 @@ class version_morceau extends Model
     }
 
     public function intervientArtiste() {
-        return $this->belongsToMany(Artiste::class, 'intervient_version_morceau', 'version_morceau_id', 'artiste_id');
+        return $this->belongsToMany(Artiste::class, 'intervient_version_morceau', 'version_morceau_id', 'artiste_id')->withPivot('role');
     }
 
     public function versionGenre() {

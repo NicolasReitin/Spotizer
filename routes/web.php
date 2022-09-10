@@ -58,7 +58,19 @@ Route::delete('albums/delete/{album}', [AlbumController::class, "destroy"])->nam
 
 
 // --------------------------------------- Routes Artistes ---------------------------------------------------
+Route::get('artistes/index', [ArtisteController::class, "index"])->name('artistes.index');
 
+Route::get('artistes/create', [ArtisteController::class, "create"])->name('artistes.create');
+
+Route::post('artistes/store', [ArtisteController::class, "store"])->name('artistes.store');
+
+Route::get('artistes/show/{artiste}', [ArtisteController::class, "show"])->name('artistes.show');
+
+Route::get('artistes/edit/{artiste}', [ArtisteController::class, "edit"])->name('artistes.edit');
+
+Route::put('artistes/update/{artiste}', [ArtisteController::class, "update"])->name('artistes.update');
+
+Route::delete('artistes/delete/{artiste}', [ArtisteController::class, "destroy"])->name('artistes.delete');
 
 
 // --------------------------------------- Routes Playlists ---------------------------------------------------

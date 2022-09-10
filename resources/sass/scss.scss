@@ -15,9 +15,6 @@ body{
     }
 }
 
-nav{
-    
-}
 .logo{
     width: 150px;
 }
@@ -140,8 +137,14 @@ nav{
 }
 
 .photoCircle{
-    border-radius: 50%;
+    border-radius: 50% !important;
 }
+
+select{
+    background-color: whitesmoke !important;
+    font-weight: bolder !important;
+}
+
 
 //----------------------------Show-----------------------------
 .showPage{
@@ -149,7 +152,14 @@ nav{
     .main{
         .showText{
             p{
+                font-size: 20px;
                 text-align: center;
+                span{
+                    font-size: 15px;
+                }
+            }
+            a{
+                color: whitesmoke;
             }
         }
         h4{

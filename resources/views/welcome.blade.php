@@ -28,7 +28,7 @@
                         <ul>
                             <li><a href="{{ route('groupes.index') }}">Groupes</a></li>
                             <li><a href="{{ route('albums.index') }}">Albums</a></li>
-                            <li><a href="">Artistes</a></li>
+                            <li><a href="{{ route('artistes.index') }}">Artistes</a></li>
                             <li><a href="">Playlist</a></li>
                         </ul>
                     </div>

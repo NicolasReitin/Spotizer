@@ -14,7 +14,7 @@ class artiste extends Model
     protected $guarded = [];
 
     public function intervientVersion_morceaus() {
-        return $this->belongsToMany(Version_morceau::class, 'intervient_version_morceau', 'artiste_id', 'version_morceau_id');
+        return $this->belongsToMany(Version_morceau::class, 'intervient_version_morceau', 'artiste_id', 'version_morceau_id')->withPivot('role');
     }
 
     public function artistesGenres() {
@@ -22,6 +22,6 @@ class artiste extends Model
     }
 
     public function membreGroupes() {
-        return $this->belongsToMany(Groupe::class, 'est_membre', 'artiste_id', 'groupe_id');
+        return $this->belongsToMany(Groupe::class, 'est_membres', 'artiste_id', 'groupe_id');
     }
 }

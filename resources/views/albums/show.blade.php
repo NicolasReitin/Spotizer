@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="titre">
-        <h1 style="font-size: 50px"><b>{{ $album->name }}</b></h1>
+        <h1 style="font-size: 40px"><b>{{ $album->titre }}</b></h1>
     </div>
     <div class="showPage mt-5">
         <div class="main">
@@ -11,8 +11,8 @@
             </div>
             <div class="showText mt-3">
                 <p>
-                    Date de création du album : {{ $album->date_creation }}
-                    <br>Nationalité : {{ $album->nationalite }}
+                    Groupe : <a href="{{ route('groupes.show', $album->groupe_id) }}">{{ $album->produitGroupes->name }}</a>
+                    <br><span>Date de sortie : {{ $album->date_de_sortie }}</span>
                 </p>
             </div>
             <div class="boutonCentral mt-2 gap-4">
@@ -25,6 +25,23 @@
                     {{-- <a href=""><button class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce album?')">Supprimer</button></a> --}}
                 </form>
             </div>
+
+            <div class="blocTitres">
+                <h3><b>Titres de l'album</b></h3>
+                {{-- <div class="casting gap-4">
+                    @foreach ($artistes as $artiste)
+                    <div class="artistes">
+                        <a href="">
+                            <div class="imageCentral">
+                                <img class="photoCircle" src="{{ $artiste->photo }}" alt="">
+                            </div>
+                        </a>
+                        <p><b>{{ $artiste->pseudo }}</b></p>
+                    </div>
+                    @endforeach
+                </div> --}}
+            </div>
+            
 
             
 

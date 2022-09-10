@@ -67,7 +67,8 @@ class AlbumController extends Controller
      */
     public function edit(album $album)
     {
-        //
+        $groupes = Groupe::all();
+        return view('albums.edit', ['album' => $album, 'groupes' => $groupes]);
     }
 
     /**
@@ -79,7 +80,12 @@ class AlbumController extends Controller
      */
     public function update(UpdatealbumRequest $request, album $album)
     {
-        //
+        $album->titre = $request->get('titre');
+        $album->groupe_id = $request->get('groupe_id');
+        $album->date_de_sortie = $request->get('date_de_sortie');
+        $album->cover = $request->get('cover');
+        $album->save();
+        return redirect('albums/index');
     }
 
     /**

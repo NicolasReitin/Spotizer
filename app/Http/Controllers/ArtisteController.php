@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Groupe;
 use App\Models\artiste;
 use App\Http\Requests\StoreartisteRequest;
 use App\Http\Requests\UpdateartisteRequest;
@@ -15,7 +16,7 @@ class ArtisteController extends Controller
      */
     public function index()
     {
-        //
+        return view('artistes.index', ['artistes' => Artiste::all()] );
     }
 
     /**
@@ -25,7 +26,8 @@ class ArtisteController extends Controller
      */
     public function create()
     {
-        //
+        $groupes = Groupe::all();
+        return view('artistes.create', ['groupes' => $groupes]);
     }
 
     /**
@@ -36,7 +38,16 @@ class ArtisteController extends Controller
      */
     public function store(StoreartisteRequest $request)
     {
-        //
+        $all_params = [];
+        $all_params['pseudo'] = $request->pseudo;
+        $all_params['name'] = $request->name;
+        $all_params['first_name'] = $request->first_name;
+        $all_params['date_naissance'] = $request->date_naissance;
+        $all_params['date_deces'] = $request->date_deces;
+        $all_params['photo'] = $request->photo;
+        // dd($all_params);
+        Artiste::create($all_params);
+        return redirect('artistes/index');
     }
 
     /**
@@ -47,7 +58,9 @@ class ArtisteController extends Controller
      */
     public function show(artiste $artiste)
     {
-        //
+        $groupe = $artiste->membreGroupes;
+        // dd($groupe);
+        return view('artistes.show', ['artiste' => $artiste, 'groupe' => $groupe]);
     }
 
     /**
@@ -58,7 +71,7 @@ class ArtisteController extends Controller
      */
     public function edit(artiste $artiste)
     {
-        //
+        return view('artistes.edit', ['artiste' => $artiste]);
     }
 
     /**
@@ -70,7 +83,14 @@ class ArtisteController extends Controller
      */
     public function update(UpdateartisteRequest $request, artiste $artiste)
     {
-        //
+        $artiste->pseudo = $request->get('pseudo');
+        $artiste->name = $request->get('name');
+        $artiste->first_name = $request->get('first_name');
+        $artiste->date_naissance = $request->get('date_naissance');
+        $artiste->date_deces = $request->get('date_deces');
+        $artiste->photo = $request->get('photo');
+        $artiste->save();
+        return redirect('artistes/index');
     }
 
     /**
@@ -81,6 +101,7 @@ class ArtisteController extends Controller
      */
     public function destroy(artiste $artiste)
     {
-        //
+        $artiste->delete();
+        return redirect('artistes/index');
     }
 }
