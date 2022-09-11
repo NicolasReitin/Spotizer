@@ -212,7 +212,64 @@ select{
 }
     
 
-//----------------------------Create-----------------------------
+//----------------------------Table-----------------------------
+.artisteTable{
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+
+    thead{
+    font-size: 25px;
+    }
+    tbody{
+    font-size: 20px;
+        tr{
+            &:hover{
+                transition: ease-in-out 0.3s;
+                background-color: #252525;
+            }
+        }
+        .titleTableTbody{
+            a{
+                text-decoration: none;
+
+                &:hover{
+                    span{
+                        color: whitesmoke;
+                    }
+                    color: whitesmoke;
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        img{
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+        }
+        
+        span{
+            font-size: 18px;
+            color: grey;
+        }
+    }
+
+    .hashtagThead{
+        width: 2%;
+    }
+    
+    .titleTableThead{
+        width: 40%;
+    }
+
+    .albumTableThead{
+        width: 20%;
+    }
+    
+    .dureeTableThead{
+    }
+}
 
 
 

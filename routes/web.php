@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroupeController;
 use App\Http\Controllers\ArtisteController;
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\Version_morceauController;
+
 
 
 /*
@@ -73,4 +75,17 @@ Route::put('artistes/update/{artiste}', [ArtisteController::class, "update"])->n
 Route::delete('artistes/delete/{artiste}', [ArtisteController::class, "destroy"])->name('artistes.delete');
 
 
-// --------------------------------------- Routes Playlists ---------------------------------------------------
+// --------------------------------------- Routes Titres ---------------------------------------------------
+Route::get('titres/index', [Version_morceauController::class, "index"])->name('titres.index');
+
+Route::get('titres/create', [Version_morceauController::class, "create"])->name('titres.create');
+
+Route::post('titres/store', [Version_morceauController::class, "store"])->name('titres.store');
+
+Route::get('titres/show/{titre}', [Version_morceauController::class, "show"])->name('titres.show');
+
+Route::get('titres/edit/{titre}', [Version_morceauController::class, "edit"])->name('titres.edit');
+
+Route::put('titres/update/{titre}', [Version_morceauController::class, "update"])->name('titres.update');
+
+Route::delete('titres/delete/{titre}', [Version_morceauController::class, "destroy"])->name('titres.delete');

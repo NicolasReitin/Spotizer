@@ -6,7 +6,7 @@ use App\Models\version_morceau;
 use App\Http\Requests\Storeversion_morceauRequest;
 use App\Http\Requests\Updateversion_morceauRequest;
 
-class VersionMorceauController extends Controller
+class Version_morceauController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,9 @@ class VersionMorceauController extends Controller
      */
     public function index()
     {
-        //
+        return view('titres.index', ['titres' => Version_morceau::with('intervientArtiste', 'appartientAlbums')
+            ->with('intervientArtiste.membreGroupes')->inRandomOrder()->get()]);
+        // return view('titres.index', ['titres' => Version_morceau::all()]);
     }
 
     /**

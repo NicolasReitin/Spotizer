@@ -6,7 +6,7 @@ use App\Models\genre_version_morceau;
 use App\Http\Requests\Storegenre_version_morceauRequest;
 use App\Http\Requests\Updategenre_version_morceauRequest;
 
-class GenreVersionMorceauController extends Controller
+class GenreVersion_MorceauController extends Controller
 {
     /**
      * Display a listing of the resource.

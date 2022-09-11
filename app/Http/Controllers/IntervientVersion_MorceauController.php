@@ -6,7 +6,7 @@ use App\Models\intervient_version_morceau;
 use App\Http\Requests\Storeintervient_version_morceauRequest;
 use App\Http\Requests\Updateintervient_version_morceauRequest;
 
-class IntervientVersionMorceauController extends Controller
+class IntervientVersion_MorceauController extends Controller
 {
     /**
      * Display a listing of the resource.
