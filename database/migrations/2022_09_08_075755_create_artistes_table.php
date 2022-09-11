@@ -23,7 +23,8 @@ return new class extends Migration
                 ->nullable();
             $table->string('first_name')
                 ->nullable();
-            $table->date('date_naissance');
+            $table->date('date_naissance')
+                ->nullable();
             $table->date('date_deces')
                 ->nullable();
             // $table->timestamps();

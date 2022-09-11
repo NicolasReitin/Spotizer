@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\GroupeController;
 use App\Http\Controllers\ArtisteController;
-use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\Est_MembreController;
 use App\Http\Controllers\Version_morceauController;
 
@@ -98,3 +99,18 @@ Route::delete('titres/delete/{titre}', [Version_morceauController::class, "destr
 Route::get('groupes/addArtiste/create/{groupe}', [Est_MembreController::class, "create"])->name('addArtiste.create');
 
 Route::post('groupes/addArtiste/store/{groupe}', [Est_MembreController::class, "store"])->name('addArtiste.store');
+
+// --------------------------------------- Routes Genres ---------------------------------------------------
+Route::get('genres/index', [GenreController::class, "index"])->name('genres.index');
+
+Route::get('genres/create', [GenreController::class, "create"])->name('genres.create');
+
+Route::post('genres/store', [GenreController::class, "store"])->name('genres.store');
+
+Route::get('genres/show/{genre}', [GenreController::class, "show"])->name('genres.show');
+
+Route::get('genres/edit/{genre}', [GenreController::class, "edit"])->name('genres.edit');
+
+Route::put('genres/update/{genre}', [GenreController::class, "update"])->name('genres.update');
+
+Route::delete('genres/delete/{genre}', [GenreController::class, "destroy"])->name('genres.delete');

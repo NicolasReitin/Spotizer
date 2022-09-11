@@ -15,7 +15,7 @@ class GenreController extends Controller
      */
     public function index()
     {
-        //
+        return view('genres.index', ['genres' => Genre::orderBy('genre', 'asc')->get()]);
     }
 
     /**
@@ -25,7 +25,7 @@ class GenreController extends Controller
      */
     public function create()
     {
-        //
+        return view('genres.create');
     }
 
     /**
@@ -36,7 +36,11 @@ class GenreController extends Controller
      */
     public function store(StoregenreRequest $request)
     {
-        //
+        $all_params = [];
+        $all_params['genre'] = $request->genre;
+        // dd($all_params);
+        Genre::create($all_params);
+        return redirect('genres/index');
     }
 
     /**
@@ -47,7 +51,7 @@ class GenreController extends Controller
      */
     public function show(genre $genre)
     {
-        //
+        return view('genres.show', ['genre' => $genre]);
     }
 
     /**
@@ -58,7 +62,7 @@ class GenreController extends Controller
      */
     public function edit(genre $genre)
     {
-        //
+        return view('genres.edit', ['genre' => $genre]);
     }
 
     /**
@@ -70,7 +74,9 @@ class GenreController extends Controller
      */
     public function update(UpdategenreRequest $request, genre $genre)
     {
-        //
+        $genre->genre = $request->get('genre');
+        $genre->save();
+        return redirect('genres/index'); 
     }
 
     /**
@@ -81,6 +87,11 @@ class GenreController extends Controller
      */
     public function destroy(genre $genre)
     {
-        //
+        $genre->delete();
+        return redirect('genres/index');
+    }
+
+    public function rand_color() {
+        return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
     }
 }
