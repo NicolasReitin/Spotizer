@@ -34,7 +34,7 @@
                 <label class="mt-2" for="">Image à upload</label>
                 <input type="file" class="form-control" name="upload" id="name" style="width: 400px">
     
-                <input type="submit" class="btn btn-outline-warning mt-3" style="width: 400px" name="Envoyer" value="Enregistrement du groupe" >
+                <input type="submit" class="btn btn-outline-warning mt-3" style="width: 400px" name="Envoyer" value="Modification de l'artiste" >
             </div>
             
             

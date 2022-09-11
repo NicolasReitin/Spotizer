@@ -101,4 +101,7 @@ class GroupeController extends Controller
         $groupe->delete();
         return redirect('groupes/index');
     }
+    
 }
+
+

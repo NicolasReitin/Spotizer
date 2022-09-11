@@ -27,7 +27,7 @@
                         {{ $i }}                       
                         @endfor</th> --}}
                     <td>
-                        <div class="titleTableTbody d-flex gap-3">
+                        <div class="titleTableTbody d-flex gap-3 mt-3">
                             <img src="{{ $titre->intervientArtiste[0]->membreGroupes[0]->photo }}" alt="cover">
                             <div>
                                 <b>{{ $titre->titre }}</b>
@@ -37,7 +37,8 @@
                     </td>
                     <td>test</td>
                     {{-- <td>{{ $titre->appartientAlbums->titre }}</td> --}}
-                    <td>{{ $titre->duree_secondes }}</td>
+                    <td>{{ gmdate("i:s", $titre->duree_secondes) }}</td>
+                    {{-- <td>{{ $titre->duree_secondes }}</td> --}}
                     <td><a href=""><img src="{{ asset('assets/icones/lecture.png') }}" alt=""></a></td>
                 </tr>
                 @endforeach

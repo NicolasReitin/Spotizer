@@ -3,7 +3,7 @@
 @section('content')
     @isset($artistes)
     <div class="titre">
-        <h1><b>artistes</b></h1>
+        <h1><b>Artistes</b></h1>
     </div>
     <div class="main">
         <div class="boutonCentral mt-5">

@@ -16,7 +16,8 @@
                 </p>
             </div>
             <div class="boutonCentral mt-2 gap-4">
-                <a href="{{ route('groupes.edit', ['groupe' => $groupe]) }}"><button class="btn btn-outline-warning ">Modifier</button></a>
+                <a href="{{ route('groupes.edit', ['groupe' => $groupe]) }}"><button class="btn btn-outline-light ">Modifier</button></a>
+                <a href="{{ route('addArtiste.create', ['groupe' => $groupe]) }}"><button class="btn btn-outline-light ">Ajouter un artiste</button></a>
                 
                 <form action="{{ route('groupes.delete', ['groupe' => $groupe]) }}" method="POST">
                     @method('DELETE')

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\est_membre;
+use App\Models\Groupe;
+use App\Models\Artiste;
+use App\Models\Est_Membre;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Storeest_membreRequest;
 use App\Http\Requests\Updateest_membreRequest;
 
-class EstMembreController extends Controller
+class Est_MembreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,9 +26,10 @@ class EstMembreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(groupe $groupe)
     {
-        //
+
+        return view('groupes.addArtiste', ['groupe' => $groupe]);
     }
 
     /**
@@ -34,9 +38,32 @@ class EstMembreController extends Controller
      * @param  \App\Http\Requests\Storeest_membreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Storeest_membreRequest $request)
+    public function store(Storeest_membreRequest $request, groupe $groupe)
     {
-        //
+        $all_params = [];
+        $all_params['pseudo'] = $request->pseudo;
+        $all_params['name'] = $request->name;
+        $all_params['first_name'] = $request->first_name;
+        $all_params['date_naissance'] = $request->date_naissance;
+        $all_params['date_deces'] = $request->date_deces;
+        $all_params['photo'] = $request->photo;
+        // dd($all_params);
+        Artiste::create($all_params);
+
+        $groupeIdParam = $groupe->id;
+        $lastArtiste = DB::table('artistes')->latest('id')->first(); //ajout du dernier id enregistré dans la table artiste soit celui créé dans la ligne au dessus : Artiste::create($all_params) mais le mieux est de selectionner par "created_at" qui n'est pas présent ici
+
+
+        $all_params2 = [];
+        $all_params2['artiste_id'] = $lastArtiste->id;
+        $all_params2['groupe_id'] = $groupeIdParam;
+        // dd($all_params2);
+        Est_Membre::create($all_params2);
+
+        $artistes = $groupe->membreArtistes;
+        $albums = $groupe->produitAlbums()->orderBy('date_de_sortie', 'asc')->get();
+        return redirect('groupes/show/'.$groupeIdParam);
+        // return redirect('groupes/show', ['groupe' => $groupe, 'artistes' => $artistes, 'albums' => $albums]);
     }
 
     /**
@@ -81,6 +108,6 @@ class EstMembreController extends Controller
      */
     public function destroy(est_membre $est_membre)
     {
-        //
+        
     }
 }

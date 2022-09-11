@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroupeController;
 use App\Http\Controllers\ArtisteController;
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\Est_MembreController;
 use App\Http\Controllers\Version_morceauController;
 
 
@@ -41,6 +42,8 @@ Route::get('groupes/edit/{groupe}', [GroupeController::class, "edit"])->name('gr
 Route::put('groupes/update/{groupe}', [GroupeController::class, "update"])->name('groupes.update');
 
 Route::delete('groupes/delete/{groupe}', [GroupeController::class, "destroy"])->name('groupes.delete');
+
+// Route::get('groupes.addArtiste/{groupe}', [GroupeController::class, "addArtiste"])->name('groupes.addArtiste');
 
 
 // --------------------------------------- Routes Albums ---------------------------------------------------
@@ -89,3 +92,9 @@ Route::get('titres/edit/{titre}', [Version_morceauController::class, "edit"])->n
 Route::put('titres/update/{titre}', [Version_morceauController::class, "update"])->name('titres.update');
 
 Route::delete('titres/delete/{titre}', [Version_morceauController::class, "destroy"])->name('titres.delete');
+
+
+// --------------------------------------- Routes ajout artiste à un groupe ---------------------------------------------------
+Route::get('groupes/addArtiste/create/{groupe}', [Est_MembreController::class, "create"])->name('addArtiste.create');
+
+Route::post('groupes/addArtiste/store/{groupe}', [Est_MembreController::class, "store"])->name('addArtiste.store');
