@@ -6,8 +6,10 @@ use App\Models\Album;
 use App\Models\Groupe;
 use App\Models\Artiste;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoregroupeRequest;
 use App\Http\Requests\UpdategroupeRequest;
+use Exception;
 
 class GroupeController extends Controller
 {
@@ -39,11 +41,22 @@ class GroupeController extends Controller
      */
     public function store(StoregroupeRequest $request)
     {
+        // dd(Storage::disk('public')->exists($name));
+        // die();
         $all_params = [];
         $all_params['name'] = $request->name;
         $all_params['nationalite'] = $request->nationalite;
         $all_params['date_creation'] = $request->date_creation;
         $all_params['photo'] = $request->photo;
+        // $all_params['upload'] = storage::url($request->imageUpload);
+
+        $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
+        $all_params['upload'] = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
+            'photo', //nom du dossier de stockage
+            $filename, // nom du fichier
+            'public' // public ou local ou autre
+        );
+
         // dd($all_params);
         Groupe::create($all_params);
         return redirect('groupes/index');
@@ -59,7 +72,7 @@ class GroupeController extends Controller
     {
         $albums = $groupe->produitAlbums()->orderBy('date_de_sortie', 'asc')->get();
         $artistes = $groupe->membreArtistes;
-        return view('groupes.show', ['groupe' => $groupe, 'albums' => $albums, "artistes" => $artistes ]);
+        return view('groupes.show', compact('groupe', 'albums', 'artistes'));
     }
 
     /**
@@ -86,6 +99,14 @@ class GroupeController extends Controller
         $groupe->nationalite = $request->get('nationalite');
         $groupe->date_creation = $request->get('date_creation');
         $groupe->photo = $request->get('photo');
+
+        $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
+        $groupe->upload = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
+            'photo', //nom du dossier de stockage
+            $filename, // nom du fichier
+            'public' // public ou local ou autre
+        );
+        // dd($groupe);
         $groupe->save();
         return redirect('groupes/index'); 
     }
@@ -98,8 +119,21 @@ class GroupeController extends Controller
      */
     public function destroy(groupe $groupe)
     {
-        $groupe->delete();
+        DB::beginTransaction();
+
+        try{
+            $picture_path = $groupe->upload;
+
+            Storage::disk('public')->delete($picture_path);
+            $groupe->delete();
+        }
+        catch(Exception $ex){
+            DB::rollBack();
+            return redirect(route('groupes.show', compact('groupe')));
+        }
+        DB::commit();
         return redirect('groupes/index');
+
     }
     
 }

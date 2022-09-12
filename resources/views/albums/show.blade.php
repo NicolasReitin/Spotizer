@@ -7,7 +7,13 @@
     <div class="showPage mt-5">
         <div class="main">
             <div class="imageShow">
-                <img src="{{ $album->cover }}" alt="">
+                <img src="
+                        @if ($album->cover )
+                            {{ $album->cover }}
+                        @else
+                            {{ Storage::url($album->upload) }}
+                        @endif
+                " alt="Photo de {{ $album->titre }}"> 
             </div>
             <div class="showText mt-3">
                 <p>

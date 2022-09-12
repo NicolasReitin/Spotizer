@@ -6,7 +6,7 @@
 </div>
 
     <div class="mt-5 ms-5 d-flex justify-content-center">
-        <form action="{{ route('albums.update', ['album' => $album]) }}" method="POST" style="width: 100%" class="d-flex justify-content-center">
+        <form action="{{ route('albums.update', ['album' => $album]) }}" method="POST" style="width: 100%" class="d-flex justify-content-center" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div>
@@ -30,8 +30,8 @@
                 <label class="mt-2" for="cover">Url de l'image</label>
                 <input type="url" value="{{ $album->cover }}" name="cover" id="cover" class="form-control" style="width: 400px" placeholder="https://example.com">
 
-                <label class="mt-2" for="upload">Image à upload</label>
-                <input type="file" class="form-control" name="upload" id="upload" style="width: 400px">
+                <label class="mt-2" for="imageUpload">Image à upload</label>
+                <input type="file" class="form-control" name="imageUpload" id="imageUpload" style="width: 400px">
     
                 <input type="submit" class="btn btn-outline-warning mt-3" style="width: 400px" name="Envoyer" value="Enregistrement du groupe" >
             </div>

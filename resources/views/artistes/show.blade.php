@@ -7,8 +7,13 @@
     <div class="showPage mt-5">
         <div class="main">
             <div class="imageShow">
-                <img src="{{ $artiste->photo }}" alt="">
-            </div>
+                <img src="
+                @if ($artiste->photo )
+                    {{ $artiste->photo }}
+                @else
+                    {{ Storage::url($artiste->upload) }}
+                @endif
+                " alt="Photo de {{ $artiste->pseudo }}">            </div>
             <div class="showText mt-3">
                 <p>
                     Pseudo : {{ $artiste->pseudo }}

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\album;
 use App\Models\Groupe;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorealbumRequest;
 use App\Http\Requests\UpdatealbumRequest;
 
@@ -43,6 +46,13 @@ class AlbumController extends Controller
         $all_params['groupe_id'] = $request->groupe_id;
         $all_params['date_de_sortie'] = $request->date_de_sortie;
         $all_params['cover'] = $request->cover;
+
+        $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
+        $all_params['upload'] = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
+            'photo', //nom du dossier de stockage
+            $filename, // nom du fichier
+            'public' // public ou local ou autre
+        );
         // dd($all_params);
         Album::create($all_params);
         return redirect('albums/index');
@@ -84,6 +94,14 @@ class AlbumController extends Controller
         $album->groupe_id = $request->get('groupe_id');
         $album->date_de_sortie = $request->get('date_de_sortie');
         $album->cover = $request->get('cover');
+
+        $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
+        $album->upload  = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
+            'photo', //nom du dossier de stockage
+            $filename, // nom du fichier
+            'public' // public ou local ou autre
+        );
+        
         $album->save();
         return redirect('albums/index');
     }
@@ -96,7 +114,20 @@ class AlbumController extends Controller
      */
     public function destroy(album $album)
     {
-        $album->delete();
+        DB::beginTransaction();
+
+        try{
+            $picture_path = $album->upload;
+
+            Storage::disk('public')->delete($picture_path);
+            $album->delete();
+        }
+        catch(Exception $ex){
+            DB::rollBack();
+            return redirect(route('albums.show', compact('album')));
+        }
+        DB::commit();
         return redirect('albums/index');
+
     }
 }

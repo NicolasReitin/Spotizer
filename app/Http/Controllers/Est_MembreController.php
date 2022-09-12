@@ -48,10 +48,10 @@ class Est_MembreController extends Controller
         $all_params['date_deces'] = $request->date_deces;
         $all_params['photo'] = $request->photo;
         // dd($all_params);
-        Artiste::create($all_params);
+        $lastArtiste = Artiste::create($all_params);
 
         $groupeIdParam = $groupe->id;
-        $lastArtiste = DB::table('artistes')->latest('id')->first(); //ajout du dernier id enregistré dans la table artiste soit celui créé dans la ligne au dessus : Artiste::create($all_params) mais le mieux est de selectionner par "created_at" qui n'est pas présent ici
+        // $lastArtiste = DB::table('artistes')->latest('id')->first(); //ajout du dernier id enregistré dans la table artiste soit celui créé dans la ligne au dessus : Artiste::create($all_params) mais le mieux est de selectionner par "created_at" qui n'est pas présent ici
 
 
         $all_params2 = [];

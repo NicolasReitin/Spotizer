@@ -14,7 +14,13 @@
             <a href="{{ route('artistes.show', ['artiste' => $artiste]) }}">
                 <div class="card cardHover">
                     <div class="imageCard">
-                        <img class="photoCircle" src="{{ $artiste->photo }}" alt="Photo de {{ $artiste->pseudo }}">
+                        <img class="photoCircle" src="
+                        @if ($artiste->photo )
+                            {{ $artiste->photo }}
+                        @else
+                            {{ Storage::url($artiste->upload) }}
+                        @endif
+                        " alt="Photo de {{ $artiste->pseudo }}">
                     </div>
                     <div class="card-body">
                         <h4 class="card-title"><b>{{ $artiste->pseudo }}</b><br>

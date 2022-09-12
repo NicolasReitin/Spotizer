@@ -6,7 +6,7 @@
 </div>
 
     <div class="mt-5 ms-5 d-flex justify-content-center">
-        <form action="{{ route('groupes.update', ['groupe' => $groupe]) }}" method="POST" style="width: 100%" class="d-flex justify-content-center">
+        <form action="{{ route('groupes.update', ['groupe' => $groupe]) }}" method="POST" style="width: 100%" class="d-flex justify-content-center" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div>
@@ -25,8 +25,8 @@
                 <label class="mt-2" for="photo">Url de l'image</label>
                 <input type="url" name="photo" id="photo" class="form-control" style="width: 400px" placeholder="https://example.com" value="{{ $groupe->photo }}">
 
-                <label class="mt-2" for="">Image à upload</label>
-                <input type="file" class="form-control" name="upload" id="name" style="width: 400px" value="">
+                <label class="mt-2" for="imageUpload">Image à upload</label>
+                <input type="file" class="form-control" name="imageUpload" id="imageUpload" style="width: 400px">
     
                 <input type="submit" class="btn btn-outline-warning mt-3" style="width: 400px" name="Envoyer" value="Enregistrement du groupe" >
             </div>

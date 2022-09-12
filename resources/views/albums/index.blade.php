@@ -14,7 +14,13 @@
             <a href="{{ route('albums.show', ['album' => $album]) }}">
                 <div class="card cardHover">
                     <div class="imageCard">
-                        <img src="{{ $album->cover }}" alt="Photo de {{ $album->name }}">
+                        <img src="
+                        @if ($album->cover )
+                            {{ $album->cover }}
+                        @else
+                            {{ Storage::url($album->upload) }}
+                        @endif
+                        " alt="Photo de {{ $album->titre }}">                    
                     </div>
                     <div class="card-body">
                         <h4 class="card-title"><b>{{ $album->titre }}</b><br>

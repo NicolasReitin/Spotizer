@@ -14,7 +14,13 @@
             <a href="{{ route('groupes.show', ['groupe' => $groupe]) }}">
                 <div class="card cardHover">
                     <div class="imageCard">
-                        <img src="{{ $groupe->photo }}" alt="Photo de {{ $groupe->name }}">
+                        <img src="
+                        @if ($groupe->photo )
+                            {{ $groupe->photo }}
+                        @else
+                            {{ Storage::url($groupe->upload) }}
+                        @endif
+                        " alt="Photo de {{ $groupe->name }}">
                     </div>
                     <div class="card-body">
                         <h4 class="card-title"><b>{{ $groupe->name }}</b></h4>

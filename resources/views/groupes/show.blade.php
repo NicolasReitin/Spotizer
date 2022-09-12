@@ -7,7 +7,13 @@
     <div class="showPage mt-5">
         <div class="main">
             <div class="imageShow">
-                <img src="{{ $groupe->photo }}" alt="">
+                <img src="
+                    @if ($groupe->photo )
+                        {{ $groupe->photo }}
+                    @else
+                        {{ Storage::url($groupe->upload) }}
+                    @endif
+                    " alt="Photo de {{ $groupe->name }}">
             </div>
             <div class="showText mt-3">
                 <p>

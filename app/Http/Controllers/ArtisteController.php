@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Groupe;
 use App\Models\artiste;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreartisteRequest;
 use App\Http\Requests\UpdateartisteRequest;
 
@@ -45,6 +48,14 @@ class ArtisteController extends Controller
         $all_params['date_naissance'] = $request->date_naissance;
         $all_params['date_deces'] = $request->date_deces;
         $all_params['photo'] = $request->photo;
+
+        $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
+        $all_params['upload'] = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
+            'photo', //nom du dossier de stockage
+            $filename, // nom du fichier
+            'public' // public ou local ou autre
+        );
+        
         // dd($all_params);
         Artiste::create($all_params);
         return redirect('artistes/index');
@@ -89,6 +100,14 @@ class ArtisteController extends Controller
         $artiste->date_naissance = $request->get('date_naissance');
         $artiste->date_deces = $request->get('date_deces');
         $artiste->photo = $request->get('photo');
+
+        $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
+        $artiste->upload = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
+            'photo', //nom du dossier de stockage
+            $filename, // nom du fichier
+            'public' // public ou local ou autre
+        );
+
         $artiste->save();
         return redirect('artistes/index');
     }
@@ -101,7 +120,19 @@ class ArtisteController extends Controller
      */
     public function destroy(artiste $artiste)
     {
-        $artiste->delete();
+        DB::beginTransaction();
+
+        try{
+            $picture_path = $artiste->upload;
+
+            Storage::disk('public')->delete($picture_path);
+            $artiste->delete();
+        }
+        catch(Exception $ex){
+            DB::rollBack();
+            return redirect(route('artistes.show', compact('artiste')));
+        }
+        DB::commit();
         return redirect('artistes/index');
     }
 }

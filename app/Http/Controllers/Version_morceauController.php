@@ -52,10 +52,9 @@ class Version_morceauController extends Controller
         $all_params = [];
         $all_params['titre'] = $request->titre;
         $all_params['duree_secondes'] = $request->duree_secondes;
-        // dd($all_params);
-        Version_morceau::create($all_params);
-
-        $lastMorceauId = DB::table('version_morceaus')->latest('id')->first();
+        $lastMorceauId = Version_morceau::create($all_params);
+        // dd($lastMorceauId);
+        // $lastMorceauId = DB::table('version_morceaus')->latest('id')->first();
 
         $all_params2 = [];
         $all_params2['version_morceau_id'] = $lastMorceauId->id;
@@ -67,7 +66,7 @@ class Version_morceauController extends Controller
         $all_params3 = [];
         $all_params3['version_morceau_id'] = $lastMorceauId->id;
         $all_params3['album_id'] = $request->album_id;
-        // Appartient_album::create($all_params3);
+        Appartient_album::create($all_params3);
         
         return redirect('titres/index');
     }

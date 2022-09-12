@@ -44,30 +44,6 @@ return [
             'throw' => false,
         ],
 
-        'musics' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/musics'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-            'throw' => false,
-        ],
-
-        'covers' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/covers'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-            'throw' => false,
-        ],
-
-        'photos' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/photos'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-            'throw' => false,
-        ],
-
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
