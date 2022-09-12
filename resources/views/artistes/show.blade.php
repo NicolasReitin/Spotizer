@@ -23,8 +23,8 @@
                     @else N.C
                     @endif
                 </p>
-                <p> @if ($groupe)
-                    Groupe : {{ $groupe[0]->name}}
+                <p> @if (!$groupe->empty())
+                    Groupe : {{ $groupe->first()->name}}
                     @else
                     Pas de groupe
                     @endif

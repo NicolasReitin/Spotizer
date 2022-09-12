@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class appartient_album extends Model
+class Appartient_album extends Model
 {
     use HasFactory;
 

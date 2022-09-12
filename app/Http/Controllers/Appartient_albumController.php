@@ -6,7 +6,7 @@ use App\Models\appartient_album;
 use App\Http\Requests\Storeappartient_albumRequest;
 use App\Http\Requests\Updateappartient_albumRequest;
 
-class AppartientAlbumController extends Controller
+class Appartient_albumController extends Controller
 {
     /**
      * Display a listing of the resource.

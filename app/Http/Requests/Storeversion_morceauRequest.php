@@ -13,7 +13,7 @@ class Storeversion_morceauRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

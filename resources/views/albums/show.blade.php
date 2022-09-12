@@ -28,18 +28,7 @@
 
             <div class="blocTitres">
                 <h3><b>Titres de l'album</b></h3>
-                {{-- <div class="casting gap-4">
-                    @foreach ($artistes as $artiste)
-                    <div class="artistes">
-                        <a href="">
-                            <div class="imageCentral">
-                                <img class="photoCircle" src="{{ $artiste->photo }}" alt="">
-                            </div>
-                        </a>
-                        <p><b>{{ $artiste->pseudo }}</b></p>
-                    </div>
-                    @endforeach
-                </div> --}}
+                
             </div>
             
 

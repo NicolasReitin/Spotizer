@@ -23,7 +23,6 @@
                     @method('DELETE')
                     @csrf
                     <input type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce groupe?')" value="Supprimer">
-                    {{-- <a href=""><button class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce groupe?')">Supprimer</button></a> --}}
                 </form>
             </div>
 
