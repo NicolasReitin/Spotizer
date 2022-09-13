@@ -97,7 +97,7 @@
             audio.play(); // commande play
             
             btnPlay.hidden = true;  // + cache du bouton play
-            btnPause.hidden = false; // et affichage du bouton pause
+            btnPause.hidden = false; // et affichage du bouton pause!
 
         }else{
             audio.pause(); //si audio en lecture -> commande pause
