@@ -6,9 +6,10 @@ use App\Models\Album;
 use App\Models\Groupe;
 use App\Models\Artiste;
 use App\Models\version_morceau;
-use App\Models\Intervient_version_morceau;
 use App\Models\Appartient_album;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Intervient_version_morceau;
 use App\Http\Requests\Storeversion_morceauRequest;
 use App\Http\Requests\Updateversion_morceauRequest;
 
@@ -38,7 +39,7 @@ class Version_morceauController extends Controller
         $artistes = Artiste::all();
         $groupes = Groupe::all();
         $albums = Album::all();
-        return view('titres.create', ['artistes' => $artistes, 'groupes' => $groupes, 'albums' => $albums]);
+        return view('titres.create', compact('artistes', 'groupes', 'albums'));
     }
 
     /**
@@ -52,21 +53,25 @@ class Version_morceauController extends Controller
         $all_params = [];
         $all_params['titre'] = $request->titre;
         $all_params['duree_secondes'] = $request->duree_secondes;
+
+        $filename = time() . '.' . $request->file('filepath')->extension(); // nom du fichier upload dans le storage
+        $all_params['filepath'] = $request->file('filepath')->storeAs( //upload du fichier dans le storage
+            'musics', //nom du dossier de stockage
+            $filename, // nom du fichier
+            'public' // public ou local ou autre
+        );
+        $all_params['extension'] = $request->file('filepath')->extension();
+        // dd($all_params);
+
         $lastMorceauId = Version_morceau::create($all_params);
         // dd($lastMorceauId);
         // $lastMorceauId = DB::table('version_morceaus')->latest('id')->first();
-
+      
         $all_params2 = [];
         $all_params2['version_morceau_id'] = $lastMorceauId->id;
-        $all_params2['role'] = $request->role;;
-        $all_params2['artiste_id'] = $request->artiste_id;
-        // dd($all_params2);
-        Intervient_version_morceau::create($all_params2);
-        
-        $all_params3 = [];
-        $all_params3['version_morceau_id'] = $lastMorceauId->id;
-        $all_params3['album_id'] = $request->album_id;
-        Appartient_album::create($all_params3);
+        $all_params2['album_id'] = $request->album_id;
+        $all_params2['numero_piste'] = $request->numero_piste;
+        Appartient_album::create($all_params2);
         
         return redirect('titres/index');
     }
@@ -88,9 +93,11 @@ class Version_morceauController extends Controller
      * @param  \App\Models\version_morceau  $version_morceau
      * @return \Illuminate\Http\Response
      */
-    public function edit(version_morceau $version_morceau)
+    public function edit(version_morceau $titre)
     {
-        //
+        $albums = Album::all();
+        // dd($titre->appartientAlbums->first());
+        return view('titres.edit', compact('titre', 'albums'));
     }
 
     /**
@@ -100,9 +107,33 @@ class Version_morceauController extends Controller
      * @param  \App\Models\version_morceau  $version_morceau
      * @return \Illuminate\Http\Response
      */
-    public function update(Updateversion_morceauRequest $request, version_morceau $version_morceau)
+    public function update(Updateversion_morceauRequest $request, version_morceau $titre)
     {
-        //
+        $titre->titre = $request->get('titre');
+        $titre->duree_secondes = $request->get('duree_secondes');
+
+
+        Storage::disk('public')->delete($titre->filepath);
+
+        $filename = time() . '.' . $request->file('filepath')->getClientOriginalExtension(); // nom du fichier upload dans le storage
+        // dd($request->file('filepath')->getErrorMessage());
+
+        $titre->filepath  = $request->file('filepath')->storeAs( //upload du fichier dans le storage
+            'musics', //nom du dossier de stockage
+            $filename, // nom du fichier
+            'public' // public ou local ou autre
+        );
+        // dd($titre);
+        // $titre->filepath = 
+        $titre->save();
+        
+
+        $albumPivot = $titre->appartientAlbums->first()->pivot;
+        $albumPivot->version_morceau_id = $titre->id;
+        $albumPivot->album_id = $request->get('album_id');
+        $albumPivot->numero_piste = $request->get('numero_piste');
+        $albumPivot->save();
+        return redirect('titres/index');
     }
 
     /**
@@ -113,6 +144,7 @@ class Version_morceauController extends Controller
      */
     public function destroy(version_morceau $titre)
     {
+        Storage::disk('public')->delete($titre->filepath);
         $titre->delete();
         return redirect('titres/index');
     }

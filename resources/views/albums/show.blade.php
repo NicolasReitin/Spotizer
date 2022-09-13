@@ -34,6 +34,49 @@
 
             <div class="blocTitres">
                 <h3><b>Titres de l'album</b></h3>
+                @foreach ($album->appartientVersion_morceaus as $titre)
+                    <table class="artisteTable">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="hashtagThead">Piste</th>
+                                <th scope="col" class="titleTableThead">Titre</th>
+                                <th scope="col" class="dureeTableThead">Durée</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <th scope="row">
+                                    {{ dd($titre->getOriginal()) }}
+                                </th>
+                                <td>
+                                    <div class="titleTableTbody d-flex gap-3 mt-3">
+                                        <img src="{{ $album->cover}}" alt="cover">
+                                        <div>
+                                            <b>{{ $titre->titre }}</b>
+                                            <br><a href=""><span>{{ $titre->appartientAlbums()->first()?->produitGroupes()?->first()->name ?? 'N.C' }}</span></a>
+                                        </div>
+                                        {{-- <div>
+                                            <b>{{ $titre->titre }}</b>
+                                            <br><a href=""><span>{{ $titre->appartientAlbums()->first()?->produitGroupes()?->first()->name ?? 'N.C' }}</span></a>                           
+                                        </div> --}}
+                                    </div>
+                                </td>
+                                {{-- <td>{{ gmdate("i:s", $titre->duree_secondes) }}</td> --}}
+                                <td><a href=""><img src="{{ asset('assets/icones/lecture.png') }}" alt=""></a></td>
+                                {{-- <td>
+                                    <form action="{{ route('titres.delete', ['titre' => $titre]) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce titre?')" value="X">
+                                    </form>
+                                </td> --}}
+                            </tr>
+                        </tbody>
+                    </table>
+                @endforeach
                 
             </div>
             
