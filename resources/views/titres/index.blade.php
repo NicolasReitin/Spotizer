@@ -31,7 +31,7 @@
                                 @if($titre->appartientAlbums->count() !== 0)
                                     {{ $titre->appartientAlbums[0]->cover}}
                                 @else
-                                    {{ asset('assets/icones/lecture.png') }}
+                                    'N.C'
                                 @endif
                             " alt="cover">
                             <div>
@@ -49,14 +49,12 @@
                     </td>
                     <td>{{ gmdate("i:s", $titre->duree_secondes) }}</td>
 
-                    {{-- <td><a href=""><img src="{{ asset('assets/icones/lecture.png') }}" alt=""></a></td> --}}
-                    {{-- {{ dd($titre->filepath) }} --}}
+                   
                     <td>
-                        {{-- <audio controls style="width: 50px !important; background-color: whitesmoke"> --}}
                         <div >
                             <img id="btnPlay" class="buttonPlay" src="{{ asset('assets/icones/Play.png') }}" alt="Play"> 
                             <img id="btnPlay" class="buttonPause" hidden="true" src="{{ asset('assets/icones/Pause.png') }}" alt="Pause">
-                            <audio class="audioPlay" hidden="true" controls preload="none" style="width: 70% !important; background-color: whitesmoke">
+                            <audio class="audioPlay" hidden="false" controls preload="none" style="background-color: whitesmoke">
                                 <source src="{{ asset('storage/'.$titre->filepath) }}">
                             </audio>
                         </div>

@@ -17,7 +17,9 @@ class TagFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name'=>fake()->regexify('[A-Za-z0-9]{10}')
+            // 'name'=>fake()->name()
+
         ];
     }
 }

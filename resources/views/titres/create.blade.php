@@ -29,9 +29,6 @@
                 <label class="mt-2" for="numero_piste">Numéro de piste</label>
                 <input type=" number" name="numero_piste" id="numero_piste" class="form-control" style="width: 400px">
 
-                <label class="mt-2" for="duree_secondes">Durée (en secondes)</label>
-                <input type="number" name="duree_secondes" id="duree_secondes" class="form-control" style="width: 400px">
-
                 <label class="mt-2" for="filepath">Fichier à upload</label>
                 <input type="file" class="form-control" name="filepath" id="filepath" style="width: 400px">
     

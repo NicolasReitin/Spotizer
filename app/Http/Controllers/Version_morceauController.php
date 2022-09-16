@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Album;
 use App\Models\Groupe;
 use App\Models\Artiste;
+use wapmorgan\Mp3Info\Mp3Info;
 use App\Models\version_morceau;
 use App\Models\Appartient_album;
 use Illuminate\Support\Facades\DB;
@@ -52,7 +53,7 @@ class Version_morceauController extends Controller
     {
         $all_params = [];
         $all_params['titre'] = $request->titre;
-        $all_params['duree_secondes'] = $request->duree_secondes;
+        // $all_params['duree_secondes'] = $request->duree_secondes;
 
         $filename = time() . '.' . $request->file('filepath')->extension(); // nom du fichier upload dans le storage
         $all_params['filepath'] = $request->file('filepath')->storeAs( //upload du fichier dans le storage
@@ -60,8 +61,11 @@ class Version_morceauController extends Controller
             $filename, // nom du fichier
             'public' // public ou local ou autre
         );
+        $audio = new Mp3Info($request->file('filepath')); // recuperation de la durée via Mp3info
+        // dd($audio);
+        $all_params['duree_secondes'] = round($audio->duration);
         $all_params['extension'] = $request->file('filepath')->extension();
-        // dd($all_params);
+        dd($all_params);
 
         $lastMorceauId = Version_morceau::create($all_params);
         // dd($lastMorceauId);
@@ -110,8 +114,10 @@ class Version_morceauController extends Controller
     public function update(Updateversion_morceauRequest $request, version_morceau $titre)
     {
         $titre->titre = $request->get('titre');
-        $titre->duree_secondes = $request->get('duree_secondes');
-
+        
+        $audio = new Mp3Info($request->file('filepath')); // recuperation de la durée via Mp3info
+        $titre->duree_secondes = round($audio->duration);
+        // dd($titre);
 
         Storage::disk('public')->delete($titre->filepath);
 
@@ -123,6 +129,7 @@ class Version_morceauController extends Controller
             $filename, // nom du fichier
             'public' // public ou local ou autre
         );
+
         // dd($titre);
         // $titre->filepath = 
         $titre->save();

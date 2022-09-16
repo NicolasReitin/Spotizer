@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Tag;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class TagSeeder extends Seeder
 {
@@ -14,6 +17,11 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        //
+        return Tag::factory()
+            ->count(5)
+            ->create();
+        // DB::table('tags')->insert([
+        //     'name'=>Str::random(10)
+        // ]);
     }
 }

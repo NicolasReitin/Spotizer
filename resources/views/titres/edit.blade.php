@@ -30,13 +30,10 @@
                 <label class="mt-2" for="numero_piste">Numéro de piste</label>
                 <input type=" number" value="{{ $titre->appartientAlbums->first()->pivot->numero_piste }}" name="numero_piste" id="numero_piste" class="form-control" style="width: 400px">
 
-                <label class="mt-2" for="duree_secondes">Durée (en secondes)</label>
-                <input type="number" value="{{ $titre->duree_secondes }}" name="duree_secondes" id="duree_secondes" class="form-control" style="width: 400px">
-
                 <label class="mt-2" for="filepath">Fichier à upload</label>
                 <input type="file" class="form-control" name="filepath" id="filepath" style="width: 400px">
     
-                <input type="submit" class="btn btn-outline-warning mt-3" style="width: 400px" name="Envoyer" value="Ajout du titre" >
+                <input type="submit" class="btn btn-outline-warning mt-3" style="width: 400px" name="Envoyer" value="Edit du titre" >
             </div>           
         </form>
     </div>
