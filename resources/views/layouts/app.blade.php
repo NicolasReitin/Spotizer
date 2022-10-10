@@ -31,7 +31,7 @@
                             <li><a href="{{ route('groupes.index') }}">Groupes</a></li>
                             <li><a href="{{ route('albums.index') }}">Albums</a></li>
                             <li><a href="{{ route('artistes.index') }}">Artistes</a></li>
-                            <li><a href="{{ route('genres.index') }}">Genres</a></li>
+                            <li><a href="{{ route('genres.index') }}">Genres</a></li> 
                         </ul>
                     </div>
 
@@ -51,6 +51,11 @@
                                     </li>
                                 @endif
                             @else
+                                @auth
+                                    @if (Auth::user()->role === 'admin')
+                                        <li class="mt-2"><a href="{{ route('dashboard') }}">Dashboard Admin</a></li>
+                                    @endif
+                                @endauth 
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{--  --}}

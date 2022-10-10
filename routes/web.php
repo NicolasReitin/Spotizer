@@ -28,9 +28,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['auth', 'role:admin'])->group(function (){
+Route::middleware(['auth', 'role:admin'])->name('dashboard')->group(function (){
     Route::get('/private', function () {
-        return 'Bonjour Admin';
+        return view('auth/dashboard');
     });
 });
 
