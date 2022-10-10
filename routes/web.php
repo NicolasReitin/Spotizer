@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\GenreController;
@@ -26,6 +27,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::middleware(['auth', 'role:admin'])->group(function (){
+    Route::get('/private', function () {
+        return 'Bonjour Admin';
+    });
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
