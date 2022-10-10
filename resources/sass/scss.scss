@@ -284,29 +284,17 @@ select{
 
 //----------------------------Login/register----------------------------
 
-.mail, .password, .nom, .prenom{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 6%;
+.login{
+    background-color: #151515;  
+    border: none;
 }
-.logoLogin{
-    width: 300px;
+.dropdown-menu{
+    background-color: #151515;
+    border-color: whitesmoke;
+}
+.card{
+    background-color: #151515;
+    border-color: whitesmoke;
+    font-weight: bold;
 }
 
-.blocLogin{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    .icon{
-        width: 30px;
-        text-align: calc(100% - 30px);
-        height: 25px;
-        margin-right: 2%;
-    }
-    .inputLogin{
-        width: 400px;
-    }
-    label{
-        text-align: center;
-    }
-}
