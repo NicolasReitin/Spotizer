@@ -86,9 +86,9 @@ class Version_morceauController extends Controller
      * @param  \App\Models\version_morceau  $version_morceau
      * @return \Illuminate\Http\Response
      */
-    public function show(version_morceau $version_morceau)
+    public function show(version_morceau $titre)
     {
-        //
+        return view('titres.show', compact('titre'));
     }
 
     /**
