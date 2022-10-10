@@ -6,9 +6,14 @@
         <h1><b>Groupes</b></h1>
     </div>
     <div class="main">
-        <div class="boutonCentral mt-5">
-            <a href="{{ route('groupes.create') }}"><button class="btn btn-outline-light ">Créer un nouveau groupe</button></a>
-        </div>
+        @auth
+            @if (Auth::user()->role === 'admin')
+                <div class="boutonCentral mt-5">
+                    <a href="{{ route('groupes.create') }}"><button class="btn btn-outline-light ">Créer un nouveau groupe</button></a>
+                </div>
+            @endif
+        @endauth 
+        
         <div class="cards">
             @foreach ($groupes as $groupe)
             <a href="{{ route('groupes.show', ['groupe' => $groupe]) }}">

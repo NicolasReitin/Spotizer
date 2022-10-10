@@ -6,9 +6,14 @@
         <h1><b>Albums</b></h1>
     </div>
     <div class="main">
-        <div class="boutonCentral mt-5">
-            <a href="{{ route('albums.create') }}"><button class="btn btn-outline-light ">Créer un nouveau album</button></a>
-        </div>
+        @auth
+            @if (Auth::user()->role === 'admin')
+                <div class="boutonCentral mt-5">
+                    <a href="{{ route('albums.create') }}"><button class="btn btn-outline-light ">Créer un nouveau album</button></a>
+                </div>
+            @endif
+        @endauth 
+        
         <div class="cards">
             @foreach ($albums as $album)
             <a href="{{ route('albums.show', ['album' => $album]) }}">

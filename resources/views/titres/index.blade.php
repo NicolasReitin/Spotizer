@@ -6,9 +6,14 @@
         <h1><b>Titres</b></h1>
     </div>
     <div class="main">
-        <div class="boutonCentral mt-5">
-            <a href="{{ route('titres.create') }}"><button class="btn btn-outline-light ">Créer un nouveau titre</button></a>
-        </div>
+        @auth
+            @if (Auth::user()->role === 'admin')
+                <div class="boutonCentral mt-5">
+                    <a href="{{ route('titres.create') }}"><button class="btn btn-outline-light ">Créer un nouveau titre</button></a>
+                </div>
+            @endif
+        @endauth 
+        
         <table class="artisteTable">
             <thead>
                 <tr>
@@ -59,17 +64,21 @@
                             </audio>
                         </div>
                     </td>
+                    @auth
+                        @if (Auth::user()->role === 'admin')
+                        <td>
+                            <a href="{{ route('titres.edit', ['titre' => $titre]) }}"><button class="btn btn-outline-light ">Edit</button></a>
+                        </td>
+                        <td>
+                            <form action="{{ route('titres.delete', ['titre' => $titre]) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <input type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce titre?')" value="X">
+                            </form>
+                        </td>
+                        @endif
+                    @endauth 
                     
-                    <td>
-                        <a href="{{ route('titres.edit', ['titre' => $titre]) }}"><button class="btn btn-outline-light ">Edit</button></a>
-                    </td>
-                    <td>
-                        <form action="{{ route('titres.delete', ['titre' => $titre]) }}" method="POST">
-                            @method('DELETE')
-                            @csrf
-                            <input type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce titre?')" value="X">
-                        </form>
-                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -82,7 +91,7 @@
 
 
 
-<script>
+{{-- <script> // dans le dossier JS
 
     function lectureAudio(event) { //fonction d'affichage d'un bouton de lecture + hidden du controls du audio
         let div_audio =  event.target.parentElement; //retour a la div parent de audio
@@ -111,7 +120,7 @@
         lectureAudio)
     });
 
-</script>
+</script> --}}
 
 
 

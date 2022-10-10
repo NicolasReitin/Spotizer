@@ -11,16 +11,20 @@
                     <h4><b>{{ $genre->genre }}</b></h4>
                 </div>  
             </div>
+            @auth
+                @if (Auth::user()->role === 'admin')
+                    <div class="boutonCentral mt-2 gap-4">
+                        <a href="{{ route('genres.edit', ['genre' => $genre]) }}"><button class="btn btn-outline-light ">Modifier</button></a>
+                        <form action="{{ route('genres.delete', ['genre' => $genre]) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <input type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce genre?')" value="Supprimer">
+                            {{-- <a href=""><button class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce genre?')">Supprimer</button></a> --}}
+                        </form>
+                    </div>
+                @endif
+            @endauth 
             
-            <div class="boutonCentral mt-2 gap-4">
-                <a href="{{ route('genres.edit', ['genre' => $genre]) }}"><button class="btn btn-outline-light ">Modifier</button></a>
-                <form action="{{ route('genres.delete', ['genre' => $genre]) }}" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <input type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce genre?')" value="Supprimer">
-                    {{-- <a href=""><button class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce genre?')">Supprimer</button></a> --}}
-                </form>
-            </div>
             
 
             <div class="boutonCentral mt-2">

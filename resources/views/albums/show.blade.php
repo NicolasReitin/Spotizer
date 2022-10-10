@@ -21,16 +21,21 @@
                     <br><span>Date de sortie : {{ $album->date_de_sortie }}</span>
                 </p>
             </div>
-            <div class="boutonCentral mt-2 gap-4">
-                <a href="{{ route('albums.edit', ['album' => $album]) }}"><button class="btn btn-outline-warning ">Modifier</button></a>
-                
-                <form action="{{ route('albums.delete', ['album' => $album]) }}" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <input type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce album?')" value="Supprimer">
-                    {{-- <a href=""><button class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce album?')">Supprimer</button></a> --}}
-                </form>
-            </div>
+            @auth
+                @if (Auth::user()->role === 'admin')
+                    <div class="boutonCentral mt-2 gap-4">
+                        <a href="{{ route('albums.edit', ['album' => $album]) }}"><button class="btn btn-outline-warning ">Modifier</button></a>
+                        
+                        <form action="{{ route('albums.delete', ['album' => $album]) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <input type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce album?')" value="Supprimer">
+                            {{-- <a href=""><button class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce album?')">Supprimer</button></a> --}}
+                        </form>
+                    </div>
+                @endif
+            @endauth 
+            
 
             <div class="blocTitres">
                 <h3><b>Titres</b></h3>

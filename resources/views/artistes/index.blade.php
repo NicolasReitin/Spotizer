@@ -6,9 +6,14 @@
         <h1><b>Artistes</b></h1>
     </div>
     <div class="main">
-        <div class="boutonCentral mt-5">
-            <a href="{{ route('artistes.create') }}"><button class="btn btn-outline-light ">Créer un nouvel artiste</button></a>
-        </div>
+        @auth
+            @if (Auth::user()->role === 'admin')
+                <div class="boutonCentral mt-5">
+                    <a href="{{ route('artistes.create') }}"><button class="btn btn-outline-light ">Créer un nouvel artiste</button></a>
+                </div>
+            @endif
+        @endauth 
+        
         <div class="cards">
             @foreach ($artistes as $artiste)
             <a href="{{ route('artistes.show', ['artiste' => $artiste]) }}">

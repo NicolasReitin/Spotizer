@@ -6,9 +6,14 @@
         <h1><b>Genres</b></h1>
     </div>
     <div class="main">
-        <div class="boutonCentral mt-5">
-            <a href="{{ route('genres.create') }}"><button class="btn btn-outline-light ">Créer un nouveau genre</button></a>
-        </div>
+        @auth
+            @if (Auth::user()->role === 'admin')
+                <div class="boutonCentral mt-5">
+                    <a href="{{ route('genres.create') }}"><button class="btn btn-outline-light ">Créer un nouveau genre</button></a>
+                </div>
+            @endif
+        @endauth 
+        
         <div class="cards">
             @foreach ($genres as $genre)
             <a href="{{ route('genres.show', ['genre' => $genre]) }}">

@@ -22,14 +22,19 @@
                 </p>
             </div>
             <div class="boutonCentral mt-2 gap-4">
-                <a href="{{ route('groupes.edit', ['groupe' => $groupe]) }}"><button class="btn btn-outline-light ">Modifier</button></a>
-                <a href="{{ route('addArtiste.create', ['groupe' => $groupe]) }}"><button class="btn btn-outline-light ">Ajouter un artiste</button></a>
+                @auth
+                    @if (Auth::user()->role === 'admin')
+                        <a href="{{ route('groupes.edit', ['groupe' => $groupe]) }}"><button class="btn btn-outline-light ">Modifier</button></a>
+                        <a href="{{ route('addArtiste.create', ['groupe' => $groupe]) }}"><button class="btn btn-outline-light ">Ajouter un artiste</button></a>
+                        
+                        <form action="{{ route('groupes.delete', ['groupe' => $groupe]) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <input type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce groupe?')" value="Supprimer">
+                        </form>
+                    @endif
+                @endauth 
                 
-                <form action="{{ route('groupes.delete', ['groupe' => $groupe]) }}" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <input type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce groupe?')" value="Supprimer">
-                </form>
             </div>
 
             <div class="blocArtiste">
@@ -37,7 +42,7 @@
                 <div class="casting gap-4">
                     @foreach ($artistes as $artiste)
                     <div class="artistes">
-                        <a href="">
+                        <a href="{{ route('artistes.show', ['artiste' =>$artiste]) }}">
                             <div class="imageCentral">
                                 <img class="photoCircle" src="{{ $artiste->photo }}" alt="">
                             </div>

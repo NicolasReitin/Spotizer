@@ -34,8 +34,12 @@
                     Pas de groupe
                     @endif
                 </p>
-                <p>
-                    Date de naissance : {{ \DateTime::createFromFormat('Y-m-d',$artiste->date_naissance)->format('d.m.Y') }}
+                <p>Date de naissance : 
+                    @if ($artiste->date_naissance)
+                        {{ \DateTime::createFromFormat('Y-m-d',$artiste->date_naissance)->format('d.m.Y') }}
+                    @else
+                        N.C
+                    @endif
                 </p>
                 @if ($artiste->date_deces)
                     <p>
@@ -43,16 +47,20 @@
                     </p>
                 @endif
             </div>
-            <div class="boutonCentral mt-2 gap-4">
-                <a href="{{ route('artistes.edit', ['artiste' => $artiste]) }}"><button class="btn btn-outline-warning ">Modifier</button></a>
-                
-                <form action="{{ route('artistes.delete', ['artiste' => $artiste]) }}" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <input type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce artiste?')" value="Supprimer">
-                    {{-- <a href=""><button class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce artiste?')">Supprimer</button></a> --}}
-                </form>
-            </div>
+            @auth
+                @if (Auth::user()->role === 'admin')
+                    <div class="boutonCentral mt-2 gap-4">
+                        <a href="{{ route('artistes.edit', ['artiste' => $artiste]) }}"><button class="btn btn-outline-warning ">Modifier</button></a>
+                        <form action="{{ route('artistes.delete', ['artiste' => $artiste]) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <input type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce artiste?')" value="Supprimer">
+                            {{-- <a href=""><button class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce artiste?')">Supprimer</button></a> --}}
+                        </form>
+                    </div>
+                @endif
+            @endauth 
+            
 
             <div class="blocTitres">
                 <h3><b>Titres de l'artiste</b></h3>
