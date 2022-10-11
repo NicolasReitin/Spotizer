@@ -66,9 +66,10 @@ class AlbumController extends Controller
      */
     public function show(album $album)
     {
-        // $numeros_piste = $album->appartientVersion_morceaus;
-        // dd($numeros_piste);
-        return view('albums.show', compact('album'));
+        $groupe = $album->produitGroupes;
+        $artistes = $groupe->membreArtistes;
+        // dd($artistes);
+        return view('albums.show', compact('album', 'groupe', 'artistes'));
     }
 
     /**

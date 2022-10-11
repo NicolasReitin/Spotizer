@@ -17,7 +17,7 @@
             </div>
             <div class="showText mt-3">
                 <p>
-                    Groupe : <a href="{{ route('groupes.show', $album->groupe_id) }}">{{ $album->produitGroupes->name }}</a>
+                    Groupe : <a href="{{ route('groupes.show', $album->groupe_id) }}">{{ $groupe->name }}</a>
                     <br><span>Date de sortie : {{ $album->date_de_sortie }}</span>
                 </p>
             </div>
@@ -35,7 +35,6 @@
                     </div>
                 @endif
             @endauth 
-            
 
             <div class="blocTitres">
                 <h3><b>Titres</b></h3>
@@ -81,9 +80,24 @@
                         @endforeach
                     </tbody>
                 </table>
-                
+
             </div>
             
+            <div class="blocArtiste mt-5">
+                <h3><b>Artistes</b></h3>
+                <div class="casting gap-4">
+                    @foreach ($artistes as $artiste)
+                    <div class="artistes">
+                        <a href="{{ route('artistes.show', ['artiste' =>$artiste]) }}">
+                            <div class="imageCentral">
+                                <img class="photoCircle" src="{{ $artiste->photo }}" alt="">
+                            </div>
+                        </a>
+                        <p><b>{{ $artiste->pseudo }}</b></p>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
 
             
 

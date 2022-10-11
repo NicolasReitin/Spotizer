@@ -23,11 +23,14 @@ class Version_morceauController extends Controller
      */
     public function index()
     {
-        return view('titres.index', [
-            'titres' => Version_morceau::with('intervientArtiste')->with('intervientArtiste.membreGroupes')->inRandomOrder()->get(),
-            'album' => Version_morceau::with('appartientAlbums')->with('appartientAlbums')->get()
-         ]);
-        // return view('titres.index', ['titres' => Version_morceau::all()]);
+        $titres = Version_morceau::with('intervientArtiste')->with('intervientArtiste.membreGroupes')->inRandomOrder()->get();
+        // $albums = Version_morceau::with('appartientAlbums')->with('appartientAlbums')->get();
+        return view('titres.index', compact('titres'));
+
+        // return view('titres.index', [
+        //     'titres' => Version_morceau::with('intervientArtiste')->with('intervientArtiste.membreGroupes')->inRandomOrder()->get(),
+        //     'album' => Version_morceau::with('appartientAlbums')->with('appartientAlbums')->get()
+        //  ]);
     }
 
     /**
@@ -55,7 +58,7 @@ class Version_morceauController extends Controller
         $all_params['titre'] = $request->titre;
         // $all_params['duree_secondes'] = $request->duree_secondes;
 
-        $filename = time() . '.' . $request->file('filepath')->extension(); // nom du fichier upload dans le storage
+        $filename = time() .'.'. $request->titre .'.'. $request->file('filepath')->extension(); // nom du fichier upload dans le storage
         $all_params['filepath'] = $request->file('filepath')->storeAs( //upload du fichier dans le storage
             'musics', //nom du dossier de stockage
             $filename, // nom du fichier
@@ -65,7 +68,7 @@ class Version_morceauController extends Controller
         // dd($audio);
         $all_params['duree_secondes'] = round($audio->duration);
         $all_params['extension'] = $request->file('filepath')->extension();
-        dd($all_params);
+        // dd($all_params);
 
         $lastMorceauId = Version_morceau::create($all_params);
         // dd($lastMorceauId);
@@ -121,7 +124,7 @@ class Version_morceauController extends Controller
 
         Storage::disk('public')->delete($titre->filepath);
 
-        $filename = time() . '.' . $request->file('filepath')->getClientOriginalExtension(); // nom du fichier upload dans le storage
+        $filename = time() .'.'. $request->titre .'.'. $request->file('filepath')->getClientOriginalExtension(); // nom du fichier upload dans le storage
         // dd($request->file('filepath')->getErrorMessage());
 
         $titre->filepath  = $request->file('filepath')->storeAs( //upload du fichier dans le storage

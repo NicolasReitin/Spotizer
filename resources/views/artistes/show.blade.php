@@ -15,23 +15,19 @@
                 @endif
                 " alt="Photo de {{ $artiste->pseudo }}">            </div>
             <div class="showText mt-3">
-                <p>
-                    Pseudo : {{ $artiste->pseudo }}
-                </p>
-                <p>
-                    Nom : {{ $artiste->name }}
-                </p>
-                <p>
-                    Prénom : 
+                <p>Pseudo : {{ $artiste->pseudo }}</p>
+                <p>Nom : {{ $artiste->name }}</p>
+                <p>Prénom : 
                     @if ($artiste->first_name)
                         {{ $artiste->first_name }}
                     @else N.C
                     @endif
                 </p>
-                <p> @if (!$groupe->empty())
-                    Groupe : {{ $groupe->first()->name}}
+                <p> Groupe : 
+                    @if ($groupe->first())
+                    {{ $groupe->first()->name}}
                     @else
-                    Pas de groupe
+                    N.C
                     @endif
                 </p>
                 <p>Date de naissance : 
@@ -42,9 +38,7 @@
                     @endif
                 </p>
                 @if ($artiste->date_deces)
-                    <p>
-                        Décédé le : {{ \DateTime::createFromFormat('Y-m-d',$artiste->date_deces)->format('d.m.Y') }}
-                    </p>
+                    <p>Décédé le : {{ \DateTime::createFromFormat('Y-m-d',$artiste->date_deces)->format('d.m.Y') }}</p>
                 @endif
             </div>
             @auth
@@ -64,21 +58,57 @@
 
             <div class="blocTitres">
                 <h3><b>Titres de l'artiste</b></h3>
-                {{-- <div class="casting gap-4">
-                    @foreach ($artistes as $artiste)
-                    <div class="artistes">
-                        <a href="">
-                            <div class="imageCentral">
-                                <img class="photoCircle" src="{{ $artiste->photo }}" alt="">
+                <table class="artisteTable">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="hashtagThead">#</th>
+                            <th scope="col" class="titleTableThead">Titre</th>
+                            <th scope="col" class="titleTableThead">Album</th>
+                            <th scope="col" class="dureeTableThead">Durée</th>
+                            <th scope="col" class=""></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        @foreach ($titres as $titre)
+                        <tr>
+                            <th scope="row">{{$loop->iteration}}</th>
+                            <td>
+                        <div class="titleTableTbody d-flex gap-3 mt-3">
+                            <img src="
+                                @if($titre->appartientAlbums->count() !== 0)
+                                    {{ $titre->appartientAlbums[0]->cover}}
+                                @else
+                                    'N.C'
+                                @endif
+                            " alt="cover">
+                            <div>
+                                <b><a href="{{ route('titres.show', ['titre' => $titre]) }}" style="color: whitesmoke">{{ $titre->titre }}</a></b>
+                                <br><a href="{{ route('groupes.show', ['groupe' =>$titre->appartientAlbums()->first()?->produitGroupes()?->first()->id ]) }}"><span>{{ $titre->appartientAlbums()->first()?->produitGroupes()?->first()->name ?? 'N.C' }}</span></a>                           
                             </div>
-                        </a>
-                        <p><b>{{ $artiste->pseudo }}</b></p>
-                    </div>
-                    @endforeach
-                </div> --}}
+                        </div>
+                    </td>
+                    <td>
+                        @if($titre->appartientAlbums->count() !== 0)
+                            {{ $titre->appartientAlbums->first()->titre}}
+                        @else
+                            N.C
+                        @endif
+                    </td>
+                            <td>Durée</td>
+                            <td>
+                                <div >
+                                    <img id="btnPlay" class="buttonPlay" src="{{ asset('assets/icones/Play.png') }}" alt="Play"> 
+                                    <img id="btnPlay" class="buttonPause" hidden="true" src="{{ asset('assets/icones/Pause.png') }}" alt="Pause">
+                                    <audio class="audioPlay" hidden="true" controls preload="none" style="width: 70% !important; background-color: whitesmoke">
+                                        <source src="{{ asset('storage/'.$titre->filepath) }}">
+                                    </audio>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-            
-
             
 
             <div class="boutonCentral mt-2">

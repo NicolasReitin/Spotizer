@@ -47,14 +47,19 @@ class ArtisteController extends Controller
         $all_params['first_name'] = $request->first_name;
         $all_params['date_naissance'] = $request->date_naissance;
         $all_params['date_deces'] = $request->date_deces;
-        $all_params['photo'] = $request->photo;
-
-        $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
-        $all_params['upload'] = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
+        if ($request->photo) {
+            $all_params['photo'] = $request->photo;
+        }
+        
+        if ($request->file('imageUpload')) {
+            $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
+            $all_params['upload'] = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
             'photo', //nom du dossier de stockage
             $filename, // nom du fichier
             'public' // public ou local ou autre
         );
+        }
+        
         
         // dd($all_params);
         Artiste::create($all_params);
@@ -70,8 +75,10 @@ class ArtisteController extends Controller
     public function show(artiste $artiste)
     {
         $groupe = $artiste->membreGroupes;
-        // dd($groupe);
-        return view('artistes.show', ['artiste' => $artiste, 'groupe' => $groupe]);
+        $titres = $artiste->intervient;
+        // dd($titres);
+        return view('artistes.show', compact('artiste', 'groupe', 'titres'));
+
     }
 
     /**
@@ -99,14 +106,19 @@ class ArtisteController extends Controller
         $artiste->first_name = $request->get('first_name');
         $artiste->date_naissance = $request->get('date_naissance');
         $artiste->date_deces = $request->get('date_deces');
-        $artiste->photo = $request->get('photo');
-
-        $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
-        $artiste->upload = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
+        if ($request->get('photo')) {
+            $artiste->photo = $request->get('photo');
+        }
+        
+        if ($request->file('imageUpload')) {
+            $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
+            $artiste->upload = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
             'photo', //nom du dossier de stockage
             $filename, // nom du fichier
             'public' // public ou local ou autre
         );
+        }
+        
 
         $artiste->save();
         return redirect('artistes/index');
@@ -124,8 +136,10 @@ class ArtisteController extends Controller
 
         try{
             $picture_path = $artiste->upload;
-
-            Storage::disk('public')->delete($picture_path);
+            if ($artiste->upload) {
+                Storage::disk('public')->delete($picture_path);
+            }
+            
             $artiste->delete();
         }
         catch(Exception $ex){

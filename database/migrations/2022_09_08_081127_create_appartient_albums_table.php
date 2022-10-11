@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('numero_piste')
                 ->nullable();
-            $table->foreignId(column: 'album_id')->constrained(table: 'albums')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId(column: 'album_id')->nullable()->default()->constrained(table: 'albums')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId(column: 'version_morceau_id')->constrained(table: 'version_morceaus')->onUpdate('cascade')->onDelete('cascade');
             // $table->timestamps();
         });

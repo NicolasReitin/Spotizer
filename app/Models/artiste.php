@@ -13,12 +13,12 @@ class artiste extends Model
 
     protected $guarded = [];
 
-    public function intervientVersion_morceaus() {
-        return $this->belongsToMany(Version_morceau::class, 'intervient_version_morceau', 'artiste_id', 'version_morceau_id')->withPivot('role');
+    public function intervient() {
+        return $this->belongsToMany(Version_morceau::class, 'intervient_version_morceaus', 'artiste_id', 'version_morceau_id')->withPivot('role');
     }
 
     public function artistesGenres() {
-        return $this->belongsToMany(Genre::class, 'genre_artiste', 'artiste_id', 'genre_id');
+        return $this->belongsToMany(Genre::class, 'genre_artistes', 'artiste_id', 'genre_id');
     }
 
     public function membreGroupes() {

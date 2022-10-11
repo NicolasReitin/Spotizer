@@ -41,20 +41,21 @@
                             " alt="cover">
                             <div>
                                 <b><a href="{{ route('titres.show', ['titre' => $titre]) }}" style="color: whitesmoke">{{ $titre->titre }}</a></b>
-                                <br><a href="{{ route('groupes.show', ['groupe' =>$titre->appartientAlbums()->first()?->produitGroupes()?->first()->id ]) }}"><span>{{ $titre->appartientAlbums()->first()?->produitGroupes()?->first()->name ?? 'N.C' }}</span></a>                           
+                                @if($titre->appartientAlbums()->first()?->produitGroupes()?->first()->id)
+                                <br><a href="{{ route('groupes.show', ['groupe' => $titre->appartientAlbums()->first()?->produitGroupes()?->first()->id ]) }}" style="color: whitesmoke"><span>{{ $titre->appartientAlbums()->first()?->produitGroupes()?->first()->name ?? 'N.C' }}</span></a>      
+                                @endif                     
                             </div>
                         </div>
                     </td>
-                    <td>
-                        @if($titre->appartientAlbums->count() !== 0)
-                            {{ $titre->appartientAlbums->first()->titre}}
+                    <td class="titleTableTbody">
+                        @if($titre->appartientAlbums->count() !== 0) 
+                        <a href="{{ route('albums.show', ['album' => $titre->appartientAlbums->first()->id]) }}" style="color: whitesmoke">{{ $titre->appartientAlbums->first()->titre}}</a>
                         @else
                             N.C
                         @endif
                     </td>
                     <td>{{ gmdate("i:s", $titre->duree_secondes) }}</td>
 
-                   
                     <td>
                         <div >
                             <img id="btnPlay" class="buttonPlay" src="{{ asset('assets/icones/Play.png') }}" alt="Play"> 

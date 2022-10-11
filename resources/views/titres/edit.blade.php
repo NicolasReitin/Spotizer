@@ -19,7 +19,12 @@
                 <label for="album_id">Album</label>
                 <div class="d-flex gap-2" >
                     <select name="album_id" id="album_id" class="form-select" style="width: 400px">
+                        @if (isset($titre->appartientAlbums->first()->id))
                         <option selected value="{{ $titre->appartientAlbums->first()->id }}">{{ $titre->appartientAlbums->first()->titre }}</option>
+                        @else
+                        <option value="" selected>Choisissez l'album ou créer un nouvel album =>></option>
+                        @endif
+
                         @foreach ( $albums as $album )
                             <option value="{{ $album->id }}">{{ $album->titre }}</option>
                         @endforeach
@@ -28,7 +33,11 @@
                 </div>  
                 
                 <label class="mt-2" for="numero_piste">Numéro de piste</label>
-                <input type=" number" value="{{ $titre->appartientAlbums->first()->pivot->numero_piste }}" name="numero_piste" id="numero_piste" class="form-control" style="width: 400px">
+                @if (isset($titre->appartientAlbums->first()->pivot->numero_piste))
+                    <input type=" number" value="{{ $titre->appartientAlbums->first()->pivot->numero_piste }}" name="numero_piste" id="numero_piste" class="form-control" style="width: 400px">
+                @else
+                    <input type=" number" name="numero_piste" id="numero_piste" class="form-control" style="width: 400px">
+                @endif
 
                 <label class="mt-2" for="filepath">Fichier à upload</label>
                 <input type="file" class="form-control" name="filepath" id="filepath" style="width: 400px">

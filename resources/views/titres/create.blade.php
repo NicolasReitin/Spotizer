@@ -18,7 +18,7 @@
                 <label for="album_id">Album</label>
                 <div class="d-flex gap-2" >
                     <select name="album_id" id="album_id" class="form-select" style="width: 400px">
-                        <option selected>Choisissez l'album ou créer un nouvel album =>></option>
+                        <option value="" selected>Choisissez l'album ou créer un nouvel album =>></option>
                         @foreach ( $albums as $album )
                             <option value="{{ $album->id }}">{{ $album->titre }}</option>
                         @endforeach
