@@ -8,7 +8,7 @@
         <div class="main">
             <div class="imageShow">
                 <img src="
-                @if ($artiste->photo )
+                @if (isset($artiste->photo))
                     {{ $artiste->photo }}
                 @else
                     {{ Storage::url($artiste->upload) }}
@@ -18,27 +18,27 @@
                 <p>Pseudo : {{ $artiste->pseudo }}</p>
                 <p>Nom : {{ $artiste->name }}</p>
                 <p>Prénom : 
-                    @if ($artiste->first_name)
+                    @if (isset($artiste->first_name))
                         {{ $artiste->first_name }}
                     @else N.C
                     @endif
                 </p>
                 <p> Groupe : 
-                    @if ($groupe->first())
+                    @if (isset($groupe->first()->name))
                     {{ $groupe->first()->name}}
                     @else
                     N.C
                     @endif
                 </p>
                 <p>Date de naissance : 
-                    @if ($artiste->date_naissance)
-                        {{ \DateTime::createFromFormat('Y-m-d',$artiste->date_naissance)->format('d.m.Y') }}
+                    @if (isset($artiste->date_naissance))
+                        {{ date('d.m.Y', strtotime($artiste->date_naissance)) }}
                     @else
                         N.C
                     @endif
                 </p>
-                @if ($artiste->date_deces)
-                    <p>Décédé le : {{ \DateTime::createFromFormat('Y-m-d',$artiste->date_deces)->format('d.m.Y') }}</p>
+                @if (isset($artiste->date_deces))
+                    <p>Décédé le : {{ date('d.m.Y', strtotime($artiste->date_deces)) }}</p>
                 @endif
             </div>
             @auth
