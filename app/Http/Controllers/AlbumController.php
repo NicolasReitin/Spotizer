@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use App\Models\album;
+use App\Models\Album;
 use App\Models\Groupe;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;

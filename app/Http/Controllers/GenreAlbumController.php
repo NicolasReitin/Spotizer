@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\genre_album;
+use App\Models\Genre_album;
 use App\Http\Requests\Storegenre_albumRequest;
 use App\Http\Requests\Updategenre_albumRequest;
 

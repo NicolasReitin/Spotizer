@@ -6,7 +6,7 @@ use App\Models\Album;
 use App\Models\Groupe;
 use App\Models\Artiste;
 use wapmorgan\Mp3Info\Mp3Info;
-use App\Models\version_morceau;
+use App\Models\Version_morceau;
 use App\Models\Appartient_album;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;

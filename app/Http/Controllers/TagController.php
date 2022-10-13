@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tag;
+use App\Models\Tag;
 use App\Http\Requests\StoretagRequest;
 use App\Http\Requests\UpdatetagRequest;
 

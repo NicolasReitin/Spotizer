@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\genre_version_morceau;
+use App\Models\Genre_version_morceau;
 use App\Http\Requests\Storegenre_version_morceauRequest;
 use App\Http\Requests\Updategenre_version_morceauRequest;
 

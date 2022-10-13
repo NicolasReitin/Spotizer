@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\intervient_version_morceau;
+use App\Models\Intervient_version_morceau;
 use App\Http\Requests\Storeintervient_version_morceauRequest;
 use App\Http\Requests\Updateintervient_version_morceauRequest;
 

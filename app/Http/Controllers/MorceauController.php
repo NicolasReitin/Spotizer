@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\morceau;
+use App\Models\Morceau;
 use App\Http\Requests\StoremorceauRequest;
 use App\Http\Requests\UpdatemorceauRequest;
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\appartient_album;
+use App\Models\Appartient_album;
 use App\Http\Requests\Storeappartient_albumRequest;
 use App\Http\Requests\Updateappartient_albumRequest;
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\playlist;
+use App\Models\Playlist;
 use App\Http\Requests\StoreplaylistRequest;
 use App\Http\Requests\UpdateplaylistRequest;
 

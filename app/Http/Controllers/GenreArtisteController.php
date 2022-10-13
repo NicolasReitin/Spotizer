@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\genre_artiste;
+use App\Models\Genre_artiste;
 use App\Http\Requests\Storegenre_artisteRequest;
 use App\Http\Requests\Updategenre_artisteRequest;
 

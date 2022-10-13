@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\genre_groupe;
+use App\Models\Genre_groupe;
 use App\Http\Requests\Storegenre_groupeRequest;
 use App\Http\Requests\Updategenre_groupeRequest;
 
