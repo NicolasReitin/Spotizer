@@ -47,15 +47,19 @@ class GroupeController extends Controller
         $all_params['name'] = $request->name;
         $all_params['nationalite'] = $request->nationalite;
         $all_params['date_creation'] = $request->date_creation;
-        $all_params['photo'] = $request->photo;
-        // $all_params['upload'] = storage::url($request->imageUpload);
+        if ($request->photo){
+            $all_params['photo'] = $request->photo;
+        }
+        if ($request->file('imageUpload')) {
+            $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
+            $all_params['upload'] = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
+                'photo', //nom du dossier de stockage
+                $filename, // nom du fichier
+                'public' // public ou local ou autre
+            );
+        }
 
-        $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
-        $all_params['upload'] = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
-            'photo', //nom du dossier de stockage
-            $filename, // nom du fichier
-            'public' // public ou local ou autre
-        );
+        
 
         // dd($all_params);
         Groupe::create($all_params);
@@ -98,14 +102,17 @@ class GroupeController extends Controller
         $groupe->name = $request->get('name');
         $groupe->nationalite = $request->get('nationalite');
         $groupe->date_creation = $request->get('date_creation');
-        $groupe->photo = $request->get('photo');
-
-        $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
-        $groupe->upload = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
-            'photo', //nom du dossier de stockage
-            $filename, // nom du fichier
-            'public' // public ou local ou autre
-        );
+        if ($request->photo){
+            $groupe->photo = $request->get('photo');
+        }
+        if ($request->file('imageUpload')) {
+            $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
+            $groupe->upload = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
+                'photo', //nom du dossier de stockage
+                $filename, // nom du fichier
+                'public' // public ou local ou autre
+            );
+        }
         // dd($groupe);
         $groupe->save();
         return redirect('groupes/index'); 

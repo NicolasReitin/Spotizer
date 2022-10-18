@@ -68,7 +68,6 @@ class Version_morceauController extends Controller
         // dd($audio);
         $all_params['duree_secondes'] = round($audio->duration);
         $all_params['extension'] = $request->file('filepath')->extension();
-        // dd($all_params);
 
         $lastMorceauId = Version_morceau::create($all_params);
         // dd($lastMorceauId);

@@ -38,7 +38,7 @@
                                 @else
                                     'N.C'
                                 @endif
-                            " alt="cover">
+                            " alt="N.C">
                             <div>
                                 <b><a href="{{ route('titres.show', ['titre' => $titre]) }}" style="color: whitesmoke">{{ $titre->titre }}</a></b>
                                 @if($titre->appartientAlbums()->first()?->produitGroupes()?->first()->id)
@@ -61,7 +61,7 @@
                             <img id="btnPlay" class="buttonPlay" src="{{ asset('assets/icones/Play.png') }}" alt="Play"> 
                             <img id="btnPlay" class="buttonPause" hidden="true" src="{{ asset('assets/icones/Pause.png') }}" alt="Pause">
                             <audio class="audioPlay" hidden="false" controls preload="none" style="background-color: whitesmoke">
-                                <source src="{{ asset('storage/'.$titre->filepath) }}">
+                                <source src="{{ asset('app/public/'.$titre->filepath) }}">
                             </audio>
                         </div>
                     </td>

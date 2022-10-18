@@ -72,7 +72,7 @@
                                     <img id="btnPlay" class="buttonPlay" src="{{ asset('assets/icones/Play.png') }}" alt="Play"> 
                                     <img id="btnPlay" class="buttonPause" hidden="true" src="{{ asset('assets/icones/Pause.png') }}" alt="Pause">
                                     <audio class="audioPlay" hidden="true" controls preload="none" style="width: 70% !important; background-color: whitesmoke">
-                                        <source src="{{ asset('storage/'.$titre->filepath) }}">
+                                        <source src="{{ asset('app/public/'.$titre->filepath) }}">
                                     </audio>
                                 </div>
                             </td>

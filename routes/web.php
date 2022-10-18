@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\GroupeController;
@@ -121,3 +122,10 @@ Route::get('genres/edit/{genre}', [GenreController::class, "edit"])->name('genre
 Route::put('genres/update/{genre}', [GenreController::class, "update"])->name('genres.update')->middleware(['role:admin']);
 
 Route::delete('genres/delete/{genre}', [GenreController::class, "destroy"])->name('genres.delete')->middleware(['role:admin']);
+
+
+// --------------------------------------- Routes Autres ---------------------------------------------------
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});

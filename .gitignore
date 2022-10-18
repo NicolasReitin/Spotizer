@@ -5,6 +5,7 @@
 /storage/*.key
 /vendor
 /public/assets
+/public/app
 .env
 .env.backup
 .phpunit.result.cache

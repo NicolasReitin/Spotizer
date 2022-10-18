@@ -82,8 +82,12 @@
                                 @endif
                             " alt="cover">
                             <div>
-                                <b><a href="{{ route('titres.show', ['titre' => $titre]) }}" style="color: whitesmoke">{{ $titre->titre }}</a></b>
-                                <br><a href="{{ route('groupes.show', ['groupe' =>$titre->appartientAlbums()->first()?->produitGroupes()?->first()->id ]) }}"><span>{{ $titre->appartientAlbums()->first()?->produitGroupes()?->first()->name ?? 'N.C' }}</span></a>                           
+                                @if ($titre)
+                                    <b><a href="{{ route('titres.show', ['titre' => $titre]) }}" style="color: whitesmoke">{{ $titre->titre }}</a></b>
+                                @endif
+                                @if (isset($groupe->first()->name))
+                                    <br><a href="{{ route('groupes.show', ['groupe' =>$groupe->first()->id ]) }}"><span>{{ $groupe->first()->name ?? 'N.C' }}</span></a>   
+                                @endif                        
                             </div>
                         </div>
                     </td>
@@ -100,7 +104,7 @@
                                     <img id="btnPlay" class="buttonPlay" src="{{ asset('assets/icones/Play.png') }}" alt="Play"> 
                                     <img id="btnPlay" class="buttonPause" hidden="true" src="{{ asset('assets/icones/Pause.png') }}" alt="Pause">
                                     <audio class="audioPlay" hidden="true" controls preload="none" style="width: 70% !important; background-color: whitesmoke">
-                                        <source src="{{ asset('storage/'.$titre->filepath) }}">
+                                        <source src="{{ asset('app/public/'.$titre->filepath) }}">
                                     </audio>
                                 </div>
                             </td>
