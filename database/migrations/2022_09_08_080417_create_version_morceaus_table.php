@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('filepath');
             $table->string('extension');
             $table->foreignId(column: 'morceau_id')->constrained(table: 'morceaus')->onUpdate('cascade')->onDelete('cascade');           
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 
