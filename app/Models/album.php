@@ -13,15 +13,15 @@ class album extends Model
 
     protected $guarded = [];
 
-    public function appartientVersion_morceaus() {
+    public function appartientVersion_morceaus() { // association N/N avec table version_morceaus
         return $this->belongsToMany(Version_morceau::class, 'appartient_albums', 'album_id', 'version_morceau_id')->withPivot('numero_piste');
     }
 
-    public function produitGroupes() {
+    public function produitGroupes() { // association 1/N avec table groupe
         return $this->belongsTo(Groupe::class, 'groupe_id', 'id');
     }
 
-    public function albumsGenres() {
+    public function albumsGenres() { // association N/N avec table genre
         return $this->belongsToMany(Genre::class, 'genre_albums', 'album_id', 'genre_id');
     }
 }

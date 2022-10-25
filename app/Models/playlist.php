@@ -13,11 +13,11 @@ class playlist extends Model
 
     protected $guarded = [];
 
-    public function users() {
+    public function users() { // association 1/n avec table users
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function contientVersion_morceaus() {
+    public function contientVersion_morceaus() { // association N/N avec table contient_morceau
         return $this->belongsToMany(Playlist::class, 'contient_morceau', 'playlist_id', 'version_morceau_id');
     }
 
