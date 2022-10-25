@@ -16,8 +16,8 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->paginate(25);
-        return view('auth/Dashboard_Admin/Users/index', compact('users'));
+        $users = DB::table('users')->paginate(25); // paginate sur la users artistes 
+        return view('auth/Dashboard_Admin/Users/index', compact('users'));//afficher la view index users du dashboard admin
     }
 
     /**

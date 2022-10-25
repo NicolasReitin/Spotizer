@@ -16,8 +16,8 @@ class AdminGroupeController extends Controller
      */
     public function index()
     {
-        $groupes = DB::table('groupes')->paginate(25);
-        return view('auth/Dashboard_Admin/Groupes/index', compact('groupes'));
+        $groupes = DB::table('groupes')->paginate(25);// paginate sur la table groupes
+        return view('auth/Dashboard_Admin/Groupes/index', compact('groupes')); //afficher la view index groupe du dashboard admin
     }
 
     /**

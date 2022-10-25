@@ -16,8 +16,8 @@ class AdminArtisteController extends Controller
      */
     public function index()
     {
-        $artistes = DB::table('artistes')->paginate(25);
-        return view('auth/Dashboard_Admin/Artistes/index', compact('artistes'));
+        $artistes = DB::table('artistes')->paginate(25); // paginate sur la table artistes 
+        return view('auth/Dashboard_Admin/Artistes/index', compact('artistes')); //afficher la view index artistes du dashboard admin
     }
 
     /**

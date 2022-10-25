@@ -20,7 +20,7 @@ class GroupeController extends Controller
      */
     public function index()
     {
-        return view('groupes.index', ['groupes' => Groupe::all()]);
+        return view('groupes.index', ['groupes' => Groupe::all()]); //renvoi vers la page index avec tous les groupes récupérés de la bdd dans la function $groupe
     }
 
     /**
@@ -30,7 +30,7 @@ class GroupeController extends Controller
      */
     public function create()
     {
-        return view('groupes.create');
+        return view('groupes.create'); // renvoi vers la page create
     }
 
     /**
@@ -41,16 +41,15 @@ class GroupeController extends Controller
      */
     public function store(StoregroupeRequest $request)
     {
-        // dd(Storage::disk('public')->exists($name));
-        // die();
-        $all_params = [];
+        $all_params = []; //création d'une fonction array vide
+        // ajout des valeurs rentrées dans le formulaire de création dans la fonction array $all_params
         $all_params['name'] = $request->name;
         $all_params['nationalite'] = $request->nationalite;
         $all_params['date_creation'] = $request->date_creation;
-        if ($request->photo){
+        if ($request->photo){ //condition pour vérifier qu'il y a une photo
             $all_params['photo'] = $request->photo;
         }
-        if ($request->file('imageUpload')) {
+        if ($request->file('imageUpload')) { //condition pour vérifier qu'il y a une image upload
             $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
             $all_params['upload'] = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
                 'photo', //nom du dossier de stockage
@@ -59,11 +58,8 @@ class GroupeController extends Controller
             );
         }
 
-        
-
-        // dd($all_params);
-        Groupe::create($all_params);
-        return redirect('groupes/index');
+        Groupe::create($all_params); // envoi des valeurs précédentes dans la BDD de la table Groupe
+        return redirect('groupes/index'); // redirection vers la page index
     }
 
     /**
@@ -74,9 +70,9 @@ class GroupeController extends Controller
      */
     public function show(groupe $groupe)
     {
-        $albums = $groupe->produitAlbums()->orderBy('date_de_sortie', 'asc')->get();
-        $artistes = $groupe->membreArtistes;
-        return view('groupes.show', compact('groupe', 'albums', 'artistes'));
+        $albums = $groupe->produitAlbums()->orderBy('date_de_sortie', 'asc')->get(); // recupère les albums du roupe via le model et la table d'association et les classes par date de sorti
+        $artistes = $groupe->membreArtistes; // recupère des artistes du groupe via le model et la table d'association
+        return view('groupes.show', compact('groupe', 'albums', 'artistes')); // renvoi vers la page show avec les fonction appelés au dessus afin de les réutiliser dans la view directement
     }
 
     /**
@@ -99,13 +95,14 @@ class GroupeController extends Controller
      */
     public function update(UpdategroupeRequest $request, groupe $groupe)
     {
+        //récupération des valeurs du formulaire pour les update dans la BDD
         $groupe->name = $request->get('name');
         $groupe->nationalite = $request->get('nationalite');
         $groupe->date_creation = $request->get('date_creation');
-        if ($request->photo){
+        if ($request->photo){ //condition pour vérifier qu'il y a une photo
             $groupe->photo = $request->get('photo');
         }
-        if ($request->file('imageUpload')) {
+        if ($request->file('imageUpload')) { //condition pour vérifier qu'il y a une image upload
             $filename = time() . '.' . $request->file('imageUpload')->extension(); // nom du fichier upload dans le storage
             $groupe->upload = $request->file('imageUpload')->storeAs( //upload du fichier dans le storage
                 'photo', //nom du dossier de stockage
@@ -113,9 +110,9 @@ class GroupeController extends Controller
                 'public' // public ou local ou autre
             );
         }
-        // dd($groupe);
-        $groupe->save();
-        return redirect('groupes/index'); 
+        
+        $groupe->save(); // sauvegarde dans la BDD
+        return redirect('groupes/index');  // redirige vers la page index.groupes
     }
 
     /**
@@ -126,23 +123,24 @@ class GroupeController extends Controller
      */
     public function destroy(groupe $groupe)
     {
+        // fonction permettant de tester avant d'executer via un test de transaction. Tout est testé jusqu'au bon déroulement : si ca fonctionne alors ça save, sinon ça rollback
         DB::beginTransaction();
 
         try{
-            $picture_path = $groupe->upload;
-
-            Storage::disk('public')->delete($picture_path);
-            $groupe->delete();
+            $picture_path = $groupe->upload; //recupération du fichier existant
+            if ($groupe->upload) { //condition pour vérifier s'il y a un fichier dans le storage
+                Storage::disk('public')->delete($picture_path); //delete du fichier existant dans le storage
+            }
+            
+            $groupe->delete(); //delete du fichier dans la BDD
         }
-        catch(Exception $ex){
-            DB::rollBack();
-            return redirect(route('groupes.show', compact('groupe')));
+        catch(Exception $ex){ // si le try ne fonctionne pas
+            DB::rollBack(); //alors ça rollback
+            return redirect(route('groupes.show', compact('groupe'))); // et redirige ver la page show
         }
-        DB::commit();
-        return redirect('groupes/index');
-
+        DB::commit(); //enregistrement de l'opération
+        return redirect('groupes/index');  //renvoi vers la page index
     }
-    
 }
 
 

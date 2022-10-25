@@ -40,27 +40,28 @@ class Est_MembreController extends Controller
      */
     public function store(Storeest_membreRequest $request, groupe $groupe)
     {
-        $all_params = [];
+        $all_params = []; //création d'une fonction array vide
+        // ajout des valeurs rentrées dans le formulaire de création dans la fonction array $all_params
         $all_params['pseudo'] = $request->pseudo;
         $all_params['name'] = $request->name;
         $all_params['first_name'] = $request->first_name;
         $all_params['date_naissance'] = $request->date_naissance;
         $all_params['date_deces'] = $request->date_deces;
-        $all_params['photo'] = $request->photo;
-        // dd($all_params);
-        $lastArtiste = Artiste::create($all_params);
+        if ($request->photo) { //condition pour vérifier qu'il y a une photo
+            $all_params['photo'] = $request->photo;
+        }
+        $lastArtiste = Artiste::create($all_params); // envoi des valeurs précédentes dans la BDD de la table Artiste + création d'une fonction enregistrant le dernier artiste créé afin de récupérer les valeurs de celui-ci
 
-        $groupeIdParam = $groupe->id;
-        // $lastArtiste = DB::table('artistes')->latest('id')->first(); //ajout du dernier id enregistré dans la table artiste soit celui créé dans la ligne au dessus : Artiste::create($all_params) mais le mieux est de selectionner par "created_at" qui n'est pas présent ici
+        $groupeIdParam = $groupe->id; 
 
-
-        $all_params2 = [];
+        $all_params2 = []; //création d'une fonction array vide
+        // ajout des valeurs rentrées dans le formulaire de création dans la fonction array $all_params2
         $all_params2['artiste_id'] = $lastArtiste->id;
         $all_params2['groupe_id'] = $groupeIdParam;
         // dd($all_params2);
-        Est_Membre::create($all_params2);
+        Est_Membre::create($all_params2); // envoi des valeurs précédentes dans la BDD de la table Est_membre
 
-        $artistes = $groupe->membreArtistes;
+        $artistes = $groupe->membreArtistes; 
         $albums = $groupe->produitAlbums()->orderBy('date_de_sortie', 'asc')->get();
         return redirect('groupes/show/'.$groupeIdParam);
         // return redirect('groupes/show', ['groupe' => $groupe, 'artistes' => $artistes, 'albums' => $albums]);

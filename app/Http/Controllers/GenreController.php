@@ -36,11 +36,12 @@ class GenreController extends Controller
      */
     public function store(StoregenreRequest $request)
     {
-        $all_params = [];
+        $all_params = []; //création d'une fonction array vide
+        // ajout des valeurs rentrées dans le formulaire de création dans la fonction array $all_params
         $all_params['genre'] = $request->genre;
         // dd($all_params);
-        Genre::create($all_params);
-        return redirect('genres/index');
+        Genre::create($all_params); // envoi des valeurs précédentes dans la BDD de la table Genre
+        return redirect('genres/index'); // redirection vers la page index
     }
 
     /**
@@ -51,7 +52,7 @@ class GenreController extends Controller
      */
     public function show(genre $genre)
     {
-        return view('genres.show', ['genre' => $genre]);
+        return view('genres.show', ['genre' => $genre]); // renvoi vers la page show avec les fonction appelés au dessus afin de les réutiliser dans la view directement
     }
 
     /**
@@ -62,7 +63,7 @@ class GenreController extends Controller
      */
     public function edit(genre $genre)
     {
-        return view('genres.edit', ['genre' => $genre]);
+        return view('genres.edit', ['genre' => $genre]);  // redirection vers la page edit et son formulaire
     }
 
     /**
@@ -74,6 +75,7 @@ class GenreController extends Controller
      */
     public function update(UpdategenreRequest $request, genre $genre)
     {
+        //récupération des valeurs du formulaire pour les update dans la BDD
         $genre->genre = $request->get('genre');
         $genre->save();
         return redirect('genres/index'); 
@@ -87,11 +89,12 @@ class GenreController extends Controller
      */
     public function destroy(genre $genre)
     {
+        //delete du genre en BDD puis redirection sur la page index
         $genre->delete();
         return redirect('genres/index');
     }
 
-    public function rand_color() {
+    public function rand_color() { //fonction permettant de random la couleur des card des genres
         return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
     }
 }

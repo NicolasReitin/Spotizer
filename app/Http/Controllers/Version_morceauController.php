@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Album;
 use App\Models\Groupe;
 use App\Models\Artiste;
@@ -23,14 +24,9 @@ class Version_morceauController extends Controller
      */
     public function index()
     {
+        //renvoi vers la page index avec tous les titres récupérés de la bdd dans la function $titres
         $titres = Version_morceau::with('intervientArtiste')->with('intervientArtiste.membreGroupes')->inRandomOrder()->get();
-        // $albums = Version_morceau::with('appartientAlbums')->with('appartientAlbums')->get();
         return view('titres.index', compact('titres'));
-
-        // return view('titres.index', [
-        //     'titres' => Version_morceau::with('intervientArtiste')->with('intervientArtiste.membreGroupes')->inRandomOrder()->get(),
-        //     'album' => Version_morceau::with('appartientAlbums')->with('appartientAlbums')->get()
-        //  ]);
     }
 
     /**
@@ -40,10 +36,10 @@ class Version_morceauController extends Controller
      */
     public function create()
     {
-        $artistes = Artiste::all();
-        $groupes = Groupe::all();
-        $albums = Album::all();
-        return view('titres.create', compact('artistes', 'groupes', 'albums'));
+        $artistes = Artiste::all(); //récupère tous les artistes de la BDD dans une fonction
+        $groupes = Groupe::all(); //récupère tous les groupes de la BDD dans une fonction
+        $albums = Album::all(); //récupère tous les albums de la BDD dans une fonction
+        return view('titres.create', compact('artistes', 'groupes', 'albums')); // et renvoi vers la page create avec les fonctions précédentes en paramètres
     }
 
     /**
@@ -54,30 +50,28 @@ class Version_morceauController extends Controller
      */
     public function store(Storeversion_morceauRequest $request)
     {
-        $all_params = [];
+        $all_params = [];//création d'une fonction array vide
+        // ajout des valeurs rentrées dans le formulaire de création dans la fonction array $all_params
         $all_params['titre'] = $request->titre;
-        // $all_params['duree_secondes'] = $request->duree_secondes;
-
-        $filename = time() .'.'. $request->titre .'.'. $request->file('filepath')->extension(); // nom du fichier upload dans le storage
-        $all_params['filepath'] = $request->file('filepath')->storeAs( //upload du fichier dans le storage
-            'musics', //nom du dossier de stockage
-            $filename, // nom du fichier
-            'public' // public ou local ou autre
-        );
-        $audio = new Mp3Info($request->file('filepath')); // recuperation de la durée via Mp3info
-        // dd($audio);
-        $all_params['duree_secondes'] = round($audio->duration);
+        if ($request->file('filepath')) {
+            $filename = time() .'.'. $request->titre .'.'. $request->file('filepath')->extension(); // nom du fichier upload dans le storage
+            $all_params['filepath'] = $request->file('filepath')->storeAs( //upload du fichier dans le storage
+                'musics', //nom du dossier de stockage
+                $filename, // nom du fichier
+                'public' // public ou local ou autre
+            );
+        $audio = new Mp3Info($request->file('filepath')); // recuperation de la durée via Mp3info (module de laravel)
+        $all_params['duree_secondes'] = round($audio->duration);//recupération durée du titre uploaded via mp3Info
         $all_params['extension'] = $request->file('filepath')->extension();
+        }
 
-        $lastMorceauId = Version_morceau::create($all_params);
-        // dd($lastMorceauId);
-        // $lastMorceauId = DB::table('version_morceaus')->latest('id')->first();
+        $lastMorceauId = Version_morceau::create($all_params); // envoi des valeurs précédentes dans la BDD de la table Artiste + création d'une fonction enregistrant le dernier titre créé afin de récupérer les valeurs de celui-ci
       
-        $all_params2 = [];
+        $all_params2 = []; //création d'une 2eme fonction array vide
         $all_params2['version_morceau_id'] = $lastMorceauId->id;
         $all_params2['album_id'] = $request->album_id;
         $all_params2['numero_piste'] = $request->numero_piste;
-        Appartient_album::create($all_params2);
+        Appartient_album::create($all_params2); // envoi des valeurs précédentes dans la BDD de la table Appartient_album
         
         return redirect('titres/index');
     }
@@ -90,7 +84,7 @@ class Version_morceauController extends Controller
      */
     public function show(version_morceau $titre)
     {
-        return view('titres.show', compact('titre'));
+        return view('titres.show', compact('titre')); // renvoi vers la page show 
     }
 
     /**
@@ -102,8 +96,7 @@ class Version_morceauController extends Controller
     public function edit(version_morceau $titre)
     {
         $albums = Album::all();
-        // dd($titre->appartientAlbums->first());
-        return view('titres.edit', compact('titre', 'albums'));
+        return view('titres.edit', compact('titre', 'albums')); // redirection vers la page edit et son formulaire
     }
 
     /**
@@ -115,33 +108,30 @@ class Version_morceauController extends Controller
      */
     public function update(Updateversion_morceauRequest $request, version_morceau $titre)
     {
+        //récupération des valeurs du formulaire pour les update dans la BDD
         $titre->titre = $request->get('titre');
+        if ($request->file('filepath')) {
+            $audio = new Mp3Info($request->file('filepath')); // recuperation de la durée via Mp3info
+            $titre->duree_secondes = round($audio->duration);
+    
+            Storage::disk('public')->delete($titre->filepath); //delete de l'ancien fichier du storage
+    
+            $filename = time() .'.'. $request->titre .'.'. $request->file('filepath')->getClientOriginalExtension(); // nom du fichier upload dans le storage
+    
+            $titre->filepath  = $request->file('filepath')->storeAs( //upload du fichier dans le storage
+                'musics', //nom du dossier de stockage
+                $filename, // nom du fichier
+                'public' // public ou local ou autre
+            );
+        }
         
-        $audio = new Mp3Info($request->file('filepath')); // recuperation de la durée via Mp3info
-        $titre->duree_secondes = round($audio->duration);
-        // dd($titre);
-
-        Storage::disk('public')->delete($titre->filepath);
-
-        $filename = time() .'.'. $request->titre .'.'. $request->file('filepath')->getClientOriginalExtension(); // nom du fichier upload dans le storage
-        // dd($request->file('filepath')->getErrorMessage());
-
-        $titre->filepath  = $request->file('filepath')->storeAs( //upload du fichier dans le storage
-            'musics', //nom du dossier de stockage
-            $filename, // nom du fichier
-            'public' // public ou local ou autre
-        );
-
-        // dd($titre);
-        // $titre->filepath = 
-        $titre->save();
-        
+        $titre->save(); // sauvegarde dans la BDD
 
         $albumPivot = $titre->appartientAlbums->first()->pivot;
         $albumPivot->version_morceau_id = $titre->id;
         $albumPivot->album_id = $request->get('album_id');
         $albumPivot->numero_piste = $request->get('numero_piste');
-        $albumPivot->save();
+        $albumPivot->save(); // sauvegarde dans la BDD
         return redirect('titres/index');
     }
 
@@ -153,8 +143,21 @@ class Version_morceauController extends Controller
      */
     public function destroy(version_morceau $titre)
     {
-        Storage::disk('public')->delete($titre->filepath);
-        $titre->delete();
-        return redirect('titres/index');
+        // fonction permettant de tester avant d'executer via un test de transaction. Tout est testé jusqu'au bon déroulement : si ca fonctionne alors ça save, sinon ça rollback
+        DB::beginTransaction();
+
+        try{
+            $titre_path = $titre->filepath; //recupération du fichier existant
+            if ($titre->filepath) { //condition pour vérifier s'il y a un fichier dans le storage
+                Storage::disk('public')->delete($titre_path); //delete du fichier existant dans le storage
+            }
+            $titre->delete(); //delete du fichier dans la BDD
+        }
+        catch(Exception $ex){ // si le try ne fonctionne pas
+            DB::rollBack(); //alors ça rollback
+            return redirect('titres/index'); // et redirige ver la page index
+        }
+        DB::commit(); //enregistrement de l'opération
+        return redirect('titres/index'); //renvoi vers la page index
     }
 }
