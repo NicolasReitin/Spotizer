@@ -26,10 +26,10 @@
                     <div class="navMenuLeft">
                         <a href="{{ url('/') }}"><img class="logo ms-5" src="{{ asset('assets/images/logo.png') }}" alt="logo spotizer"></a> 
                         <ul>
-                            <li><a href="{{ route('titres.index') }}">Titres</a></li>
-                            <li><a href="{{ route('groupes.index') }}">Groupes</a></li>
                             <li><a href="{{ route('albums.index') }}">Albums</a></li>
                             <li><a href="{{ route('artistes.index') }}">Artistes</a></li>
+                            <li><a href="{{ route('groupes.index') }}">Groupes</a></li>
+                            <li><a href="{{ route('titres.index') }}">Titres</a></li>
                             <li><a href="{{ route('genres.index') }}">Genres</a></li> 
                             <li><a href="">Playlist</a></li>
                         </ul>
@@ -83,14 +83,20 @@
                 
                 <div class="navbarWelcome hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     
-                        
-                    
                 </div>
             </nav>
             
             @endif
 
         <main class="py-4">
+            {{-- barre de recherche --}}
+            <div class="searchbar mb-5 d-flex justify-content-center">
+                <form action="{{ route('search') }}" method="GET" class="d-flex gap-2">
+                    <input type="search" class="form-control" name="search" placeholder="Chercher un titre, un artiste, un album, un groupe, ..." id="" style="width: 500px; background: #151515; color:whitesmoke">
+                    <input type="submit" class="form-control btn btn-outline-light" name="envoyer" value="Chercher" style="width: 100px">
+                </form>
+            </div>
+            
             @yield('content')
         </main>
     </div>

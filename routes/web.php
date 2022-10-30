@@ -1,20 +1,22 @@
 <?php
 
 use App\Models\User;
+use App\Models\Version_morceau;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\GroupeController;
 use App\Http\Controllers\ArtisteController;
-use App\Http\Controllers\Est_MembreController;
-use App\Http\Controllers\Version_morceauController;
+use App\Http\Controllers\AdminTitreController;
 use App\Http\Controllers\AdminUsersController;
+use App\Http\Controllers\Est_MembreController;
 use App\Http\Controllers\AdminGroupeController;
 use App\Http\Controllers\AdminArtisteController;
-use App\Http\Controllers\AdminTitreController;
-use App\Models\Version_morceau;
+use App\Http\Controllers\Version_morceauController;
+use App\Http\Controllers\SearchBarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +45,10 @@ Route::middleware(['auth', 'role:admin'])->name('dashboard')->group(function (){
     });
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// --------------------------------------- Routes SEARCHBAR ---------------------------------------------------
+Route::get('/search', [SearchBarController::class, 'search'])->name('search');
 
 // --------------------------------------- Routes Groupes ---------------------------------------------------
 Route::get('groupes/index', [GroupeController::class, "index"])->name('groupes.index');

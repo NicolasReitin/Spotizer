@@ -1,8 +1,13 @@
+$black: #151515;
+$blackLight: #181818;
+$blackVeryLight: #252525;
+$gold: rgb(255, 196, 0);
+
 *{
     color: whitesmoke;
 }
 body{
-    background-color: #151515;
+    background-color: $black;
 }
 //------------------------------Navbar---------------------------
 
@@ -51,7 +56,7 @@ body{
         margin-right: 20px;
 
         &:hover{
-            color: white;
+            color: whitesmoke;
             text-decoration: underline;
             font-weight: bold;
         }
@@ -82,7 +87,7 @@ body{
     }
 
     .card{
-        background-color: #181818;
+        background-color: $blackLight;
         border: none;
         width: 280px;
 
@@ -95,7 +100,7 @@ body{
                 margin-top: 5%;
                 border-radius: 2%;
                 text-align: center;
-                background-color: #151515;
+                background-color: $black;
                 width: 250px;
                 height: 220px;
             }
@@ -120,14 +125,14 @@ body{
 }
 
 .cardHover{
-    background-color: #181818;
+    background-color: $blackLight;
     border-radius: 2%;
     border: none;
     padding: 5%;
 
         &:hover{
             transition: ease-in-out 0.3s;
-            background-color: #252525;
+            background-color: $blackVeryLight
         }
 }
 
@@ -219,7 +224,7 @@ select{
         tr{
             &:hover{
                 transition: ease-in-out 0.3s;
-                background-color: #252525;
+                background-color: $blackVeryLight;
             }
         }
         .titleTableTbody{
@@ -279,15 +284,15 @@ select{
 //----------------------------Login/register----------------------------
 
 .login{
-    background-color: #151515;  
+    background-color: $black;
     border: none;
 }
 .dropdown-menu{
-    background-color: #151515;
+    background-color: $black;
     border-color: whitesmoke;
 }
 .card{
-    background-color: #151515;
+    background-color: $black;
     border-color: whitesmoke;
     font-weight: bold;
 }
@@ -306,7 +311,7 @@ select{
             font-size: 16px;
             font-weight: bold;
             &:hover{
-                color: gold;
+                color: $gold;
                 font-weight: bold;
                 text-decoration: underline;
             }
@@ -318,7 +323,7 @@ select{
         color: whitesmoke;
         text-decoration: none;
         &:hover{
-            color: gold;
+            color: $gold;
             font-weight: bold;
         }
     }
