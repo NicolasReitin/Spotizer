@@ -105,7 +105,6 @@ Route::get('genres/edit/{genre}', [GenreController::class, "edit"])->name('genre
 Route::put('genres/update/{genre}', [GenreController::class, "update"])->name('genres.update')->middleware(['role:admin']);
 Route::delete('genres/delete/{genre}', [GenreController::class, "destroy"])->name('genres.delete')->middleware(['role:admin']);
 
-
 //----------------------------------------------------------------ADMIN-------------------------------------------------------------
         //--------------------CRUD Route:: Admin Users-------------------------
 Route::get('/private/users', [AdminUsersController::class, 'index'])->name('users')->middleware(['role:admin']);

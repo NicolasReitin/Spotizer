@@ -16,8 +16,6 @@
                                 <th scope="col" class="albumTableThead">Album</th>
                                 <th scope="col" class="dureeTableThead">Durée</th>
                                 <th></th>
-                                <th></th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
@@ -58,23 +56,8 @@
                                             </audio>
                                         </div>
                                     </td>
-                                    @auth
-                                    @if (Auth::user()->role === 'admin')
-                                    <td>
-                                        <a href="{{ route('titres.edit', ['titre' => $titre]) }}"><button class="btn btn-outline-light ">Edit</button></a>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('titres.delete', ['titre' => $titre]) }}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <input type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce titre?')" value="X">
-                                        </form>
-                                    </td>
-                                    @endif
-                                @endauth 
                                 </tr>
-                            @endforeach                    
-
+                            @endforeach   
                         </tbody>
                     </table>
                     <hr>

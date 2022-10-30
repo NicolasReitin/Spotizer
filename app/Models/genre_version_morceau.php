@@ -12,4 +12,6 @@ class genre_version_morceau extends Model
     public $timestamps = false;
 
     protected $guarded = [];
+
+    
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Genre;
 use App\Http\Requests\StoregenreRequest;
 use App\Http\Requests\UpdategenreRequest;
+use Termwind\Components\Dd;
 
 class GenreController extends Controller
 {
@@ -15,7 +16,8 @@ class GenreController extends Controller
      */
     public function index()
     {
-        return view('genres.index', ['genres' => Genre::orderBy('genre', 'asc')->get()]);
+        $genres = Genre::inRandomOrder()->get();
+        return view('genres.index', compact('genres'));
     }
 
     /**
@@ -52,7 +54,11 @@ class GenreController extends Controller
      */
     public function show(genre $genre)
     {
-        return view('genres.show', ['genre' => $genre]); // renvoi vers la page show avec les fonction appelés au dessus afin de les réutiliser dans la view directement
+        $titresGenres = $genre->genreVersions()->get(); //récupère les titres du genre séléctionné
+        $groupesGenres = $genre->genreGroupes()->get(); //récupère les groueps du genre séléctionné
+        $artistesGenres = $genre->genreArtistes()->get(); //récupère les artistes du genre séléctionné
+        $albumsGenres = $genre->genreAlbums()->get(); //récupère les albums du genre séléctionné
+        return view('genres.show', compact('genre', 'titresGenres', 'groupesGenres', 'artistesGenres', 'albumsGenres')); // renvoi vers la page show avec les fonction appelés au dessus afin de les réutiliser dans la view directement
     }
 
     /**
@@ -63,7 +69,7 @@ class GenreController extends Controller
      */
     public function edit(genre $genre)
     {
-        return view('genres.edit', ['genre' => $genre]);  // redirection vers la page edit et son formulaire
+        return view('genres.edit', compact('genre'));  // redirection vers la page edit et son formulaire
     }
 
     /**
@@ -97,4 +103,5 @@ class GenreController extends Controller
     public function rand_color() { //fonction permettant de random la couleur des card des genres
         return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
     }
+
 }
