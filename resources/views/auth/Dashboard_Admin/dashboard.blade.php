@@ -26,9 +26,12 @@
                     @foreach ($titres as $titre)
                         <div class="lastUsers d-flex">
                             <a href="{{ route('show.titre', ['titre' => $titre]) }}">{{ ucfirst($titre->titre) }}</a> 
-                            @if ($titre->appartientAlbums()->first()->produitGroupes()->first()->id)
-                                <a href="{{ route('groupes.show', ['groupe' => $titre->appartientAlbums()->first()->produitGroupes()->first()->id]) }}">&nbsp; - ({{ $titre->appartientAlbums()->first()->produitGroupes()->first()->name }})</a>
+                            @if (sizeof($titre->appartientAlbums()->get()) > 0)
+                                @if ($titre->appartientAlbums()->first()->produitGroupes()->first()->id)
+                                    <a href="{{ route('groupes.show', ['groupe' => $titre->appartientAlbums()->first()->produitGroupes()->first()->id]) }}">&nbsp; - ({{ $titre->appartientAlbums()->first()->produitGroupes()->first()->name }})</a>
+                                @endif
                             @endif
+                                
                         </div>
                         <br>
                     @endforeach

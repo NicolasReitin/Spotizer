@@ -6,6 +6,9 @@
         @include('layouts.AdminSidebar')
         <div class="mainAdmin">
             <h1 class="mb-5 text-center">Liste des utilisateurs</h1>
+            <div class="boutonCentral mt-5">
+                <a href="{{ route('artistes.create') }}"><button class="btn btn-outline-light ">Créer un nouvel artiste</button></a>
+            </div>
             <table class="table">
                 <thead>
                     <tr>
@@ -34,10 +37,10 @@
                         <td>{{ $artiste->photo }}</td>
                         <td>{{ $artiste->upload }}</td>
                         <td>
-                            <a href="" class="btn btn-warning"><img src="{{ asset('assets/icones/edit.svg') }}" alt="Edit" style="background: 0%"></a>
+                            <a href="{{ route('artistes.edit', ['artiste' => $artiste->id]) }}" class="btn btn-warning"><img src="{{ asset('assets/icones/edit.svg') }}" alt="Edit" style="background: 0%"></a>
                         </td>
                         <td>
-                            <form action="" method="POST">
+                            <form action="{{ route('artistes.delete', ['artiste' => $artiste->id]) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet artiste?')"><img src="{{ asset('assets/icones/trash.svg') }}" alt="Delete" style="background: 0%"></button>

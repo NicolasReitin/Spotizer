@@ -17,6 +17,7 @@ use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\Est_MembreController;
 use App\Http\Controllers\AdminGroupeController;
 use App\Http\Controllers\AdminArtisteController;
+use App\Http\Controllers\AdminAlbumController;
 use App\Http\Controllers\Version_morceauController;
 
 /*
@@ -128,10 +129,10 @@ Route::delete('/private/users/delete/{user}', [AdminUsersController::class, 'des
 Route::get('/private/groupes', [AdminGroupeController::class, 'index'])->name('adminGroupes')->middleware(['role:admin']);
 Route::get('/private/groupes/create', [AdminGroupeController::class, 'create'])->name('create.groupe')->middleware(['role:admin']);
 Route::post('/private/groupes/create', [AdminGroupeController::class, 'store'])->name('store.groupe')->middleware(['role:admin']);
-Route::get('/private/groupes/show/{groupe}', [AdminGroupeController::class, 'show'])->name('show.groupe')->middleware(['role:admin']);
-Route::get('/private/groupes/edit/{groupe}', [AdminGroupeController::class, 'edit'])->name('edit.groupe')->middleware(['role:admin']);
-Route::put('/private/groupes/update/{groupe}', [AdminGroupeController::class, 'update'])->name('update.groupe')->middleware(['role:admin']);
-Route::delete('/private/groupes/delete/{groupe}', [AdminGroupeController::class, 'destroy'])->name('delete.groupe')->middleware(['role:admin']);
+Route::get('/private/groupes/show/{AdminGroupe}', [AdminGroupeController::class, 'show'])->name('show.groupe')->middleware(['role:admin']);
+Route::get('/private/groupes/edit/{AdminGroupe}', [AdminGroupeController::class, 'edit'])->name('edit.groupe')->middleware(['role:admin']);
+Route::put('/private/groupes/update/{AdminGroupe}', [AdminGroupeController::class, 'update'])->name('update.groupe')->middleware(['role:admin']);
+Route::delete('/private/groupes/delete/{AdminGroupe}', [AdminGroupeController::class, 'destroy'])->name('delete.groupe')->middleware(['role:admin']);
         
         //--------------------CRUD Route:: Admin Artiste-------------------------
 Route::get('/private/artistes', [AdminArtisteController::class, 'index'])->name('adminArtistes')->middleware(['role:admin']);
@@ -150,6 +151,15 @@ Route::get('/private/titres/show/{titre}', [AdminTitreController::class, 'show']
 Route::get('/private/titres/edit/{titre}', [AdminTitreController::class, 'edit'])->name('edit.titre')->middleware(['role:admin']);
 Route::put('/private/titres/update/{titre}', [AdminTitreController::class, 'update'])->name('update.titre')->middleware(['role:admin']);
 Route::delete('/private/titres/delete/{titre}', [AdminTitreController::class, 'destroy'])->name('delete.titre')->middleware(['role:admin']);
+
+        //--------------------CRUD Route:: Admin Albums-------------------------
+Route::get('/private/albums', [AdminAlbumController::class, 'index'])->name('adminAlbums')->middleware(['role:admin']);
+Route::get('/private/albums/create', [AdminAlbumController::class, 'create'])->name('create.album')->middleware(['role:admin']);
+Route::post('/private/albums/create', [AdminAlbumController::class, 'store'])->name('store.album')->middleware(['role:admin']);
+Route::get('/private/albums/show/{album}', [AdminAlbumController::class, 'show'])->name('show.album')->middleware(['role:admin']);
+Route::get('/private/albums/edit/{album}', [AdminAlbumController::class, 'edit'])->name('edit.album')->middleware(['role:admin']);
+Route::put('/private/albums/update/{album}', [AdminAlbumController::class, 'update'])->name('update.album')->middleware(['role:admin']);
+Route::delete('/private/albums/delete/{album}', [AdminAlbumController::class, 'destroy'])->name('delete.album')->middleware(['role:admin']);
         
 
     

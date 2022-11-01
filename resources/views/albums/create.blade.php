@@ -17,7 +17,7 @@
 
                 <label for="groupe_id">Nom du groupe</label>
                 <select class="form-select" name="groupe_id" id="groupe_id">
-                    <option selected>Choisissez un groupe</option>
+                    <option selected disabled>Choisissez un groupe</option>
                     @foreach ($groupes as $groupe)
                         <option value="{{ $groupe->id }}">{{ $groupe->name }}</option>
                     @endforeach

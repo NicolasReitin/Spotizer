@@ -25,6 +25,10 @@
             </li>
             <hr>
             <li class="nav-item">
+                <a class="nav-link" href="{{ route('adminAlbums') }}">Liste des Albums</a>
+            </li>
+            <hr>
+            <li class="nav-item">
                 <a class="nav-link" href="">Panel des droits</a>
             </li>
             <hr>

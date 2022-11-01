@@ -29,7 +29,7 @@
                     </div>
                     <div class="card-body">
                         <h4 class="card-title"><b>{{ $album->titre }}</b><br>
-                            <span style="color: grey">{{ $album->produitGroupes->name }}</span>
+                            {{-- <span style="color: grey">{{ $album->produitGroupes->name }}</span> --}}
                         </h4>
                     </div>
                 </div>  

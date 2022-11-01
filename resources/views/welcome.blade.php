@@ -18,15 +18,15 @@
             @if (Route::has('login'))
             <nav class="d-flex">
                 
-                <div class="navMenu">
+                <div class="navMenu mt-4">
                     <div class="navMenuLeft">
                         <a href=""><img class="logo ms-5" src="{{ asset('assets/images/logo.png') }}" alt="logo spotizer"></a> 
                         <ul>
                             <li><a href="{{ route('titres.index') }}">Titres</a></li>
-                            <li><a href="{{ route('groupes.index') }}">Groupes</a></li>
                             <li><a href="{{ route('albums.index') }}">Albums</a></li>
                             <li><a href="{{ route('artistes.index') }}">Artistes</a></li>
-                            <li><a href="{{ route('genres.index') }}">Genres</a></li>
+                            <li><a href="{{ route('groupes.index') }}">Groupes</a></li>
+                            <li><a href="{{ route('genres.index') }}">Genres</a></li> 
                             <li><a href="">Playlist</a></li>
                         </ul>
                     </div>
@@ -56,6 +56,7 @@
 
             <div class="imageWelcome">
                 <img src="{{ asset('assets/images/spotizer_accueil.jpg') }}" alt="fond_spotizer">
+                <h5 class="mt-2">Le meilleur site de musique en ligne</h5>
             </div>
 
         </div>

@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Album;
 use App\Models\Groupe;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorealbumRequest;
 use App\Http\Requests\UpdatealbumRequest;
@@ -43,7 +44,10 @@ class AlbumController extends Controller
     {
         $all_params = []; //création d'une fonction array vide
         $all_params['titre'] = $request->titre; // ajout du titre de l'album via la valeur rentrée dans le formulaire de création
-        $all_params['groupe_id'] = $request->groupe_id; // ajout de l'id du groupe via la valeur rentrée dans le formulaire de création
+        if ($request->groupe_id) {
+            $all_params['groupe_id'] = $request->groupe_id; // ajout de l'id du groupe via la valeur rentrée dans le formulaire de création
+        }
+        
         $all_params['date_de_sortie'] = $request->date_de_sortie; // ajout de la date de sortie de l'album via la valeur rentrée dans le formulaire de création
         if ($request->cover) { //condition pour vérifier qu'il y a une cover
             $all_params['cover'] = $request->cover; // ajout de la couverture de la pochette de l'album via la valeur rentrée dans le formulaire de création
@@ -70,9 +74,14 @@ class AlbumController extends Controller
      */
     public function show(album $album)
     {
-        $groupe = $album->produitGroupes; // recupère  du groupe de l'ablum via le model et la table d'association
-        $artistes = $groupe->membreArtistes; //recupère les artistes du groupe de l'ablum via le model et les tables d'association
-        return view('albums.show', compact('album', 'groupe', 'artistes')); // renvoi vers la page show avec les fonction appelés au dessus afin de les réutiliser dans la view directement
+        if ($album->produitGroupes) {
+            $groupe = $album->produitGroupes; // recupère  du groupe de l'ablum via le model et la table d'association
+            $artistes = $groupe->membreArtistes; //recupère les artistes du groupe de l'ablum via le model et les tables d'association
+            return view('albums.show', compact('album', 'groupe', 'artistes')); // renvoi vers la page show avec les fonction appelés au dessus afin de les réutiliser dans la view directement
+        }else{
+            return view('albums.show', compact('album'));
+        }
+        
     }
 
     /**
@@ -142,7 +151,11 @@ class AlbumController extends Controller
             return redirect(route('albums.show', compact('album'))); // et redirige ver la page show
         }
         DB::commit(); //enregistrement de l'opération
-        return redirect('albums/index'); //renvoi vers la page index
+        if (Auth::user()->role === 'admin') {
+            return redirect('private/albums'); //renvoi vers la page index de l'admin
+        }else{
+            return redirect('albums/index'); //renvoi vers la page index
+        }
 
     }
 }

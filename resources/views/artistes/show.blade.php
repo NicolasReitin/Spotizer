@@ -98,7 +98,7 @@
                             N.C
                         @endif
                     </td>
-                            <td>Durée</td>
+                            <td>{{ gmdate("i:s", $titre->duree_secondes) }}</td>
                             <td>
                                 <div >
                                     <img id="btnPlay" class="buttonPlay" src="{{ asset('assets/icones/Play.png') }}" alt="Play"> 
