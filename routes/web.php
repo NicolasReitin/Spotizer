@@ -10,13 +10,14 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\GroupeController;
 use App\Http\Controllers\ArtisteController;
+use App\Http\Controllers\MyAccountController;
+use App\Http\Controllers\SearchBarController;
 use App\Http\Controllers\AdminTitreController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\Est_MembreController;
 use App\Http\Controllers\AdminGroupeController;
 use App\Http\Controllers\AdminArtisteController;
 use App\Http\Controllers\Version_morceauController;
-use App\Http\Controllers\SearchBarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,14 @@ Route::put('groupes/update/{groupe}', [GroupeController::class, "update"])->name
 Route::delete('groupes/delete/{groupe}', [GroupeController::class, "destroy"])->name('groupes.delete')->middleware(['role:admin']);
 
 // Route::get('groupes.addArtiste/{groupe}', [GroupeController::class, "addArtiste"])->name('groupes.addArtiste');
+
+
+// --------------------------------------- Routes user / account ---------------------------------------------------
+Route::get('myAccount', [MyAccountController::class, "index"])->name('myAccount')->middleware(['auth']);
+Route::get('myAccount/edit/{user}', [MyAccountController::class, "edit"])->name('myAccount.edit')->middleware(['auth']);
+Route::put('myAccount/update/{user}', [MyAccountController::class, "update"])->name('myAccount.update')->middleware(['auth']);
+Route::delete('myAccount/delete/{user}', [MyAccountController::class, "destroy"])->name('myAccount.delete')->middleware(['auth']);
+
 
 
 // --------------------------------------- Routes Albums ---------------------------------------------------

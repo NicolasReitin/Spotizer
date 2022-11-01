@@ -88,15 +88,7 @@
             
             @endif
 
-        <main class="py-4">
-            {{-- barre de recherche --}}
-            <div class="searchbar mb-5 d-flex justify-content-center">
-                <form action="{{ route('search') }}" method="GET" class="d-flex gap-2">
-                    <input type="search" class="form-control" name="search" placeholder="Chercher un titre, un artiste, un album, un groupe, ..." id="" style="width: 500px; background: #151515; color:whitesmoke">
-                    <input type="submit" class="form-control btn btn-outline-light" name="envoyer" value="Chercher" style="width: 100px">
-                </form>
-            </div>
-            
+        <main class="py-4">            
             @yield('content')
         </main>
     </div>

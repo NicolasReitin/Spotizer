@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appAdmin')
 
 
 @section('content')
@@ -13,7 +13,7 @@
                     <h3><u><b>5 derniers utilisateurs inscrits</b></u> : <br></h3>
                     @foreach ($users as $user)
                         <div class="lastUsers">
-                            <a href="{{ route('show.user', ['user' => $user]) }}">{{ ucfirst($user->pseudo) }}</a>
+                            <a href="{{ route('myAccount.edit', ['user' => $user->id]) }}">{{ ucfirst($user->pseudo) }}</a>
                         </div>
                         <br>
                     @endforeach
