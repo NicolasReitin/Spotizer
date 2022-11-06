@@ -87,6 +87,13 @@
         <p class="alert-warning">Pas de titre</p>
     @endisset
     
+    <div class="imageCentral mt-4">
+        <div class="paginate">
+            {{ $titres->links() }} 
+        </div>
+    </div>
+    
+    
 
 
 @endsection

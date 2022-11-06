@@ -248,6 +248,25 @@ select{
     background: #151515; 
     color:whitesmoke;
 }
+.pagination {
+    --bs-pagination-color: #e9ecef;
+    --bs-pagination-bg: #151515;
+    --bs-pagination-border-width: 1px;
+    --bs-pagination-border-color: #dee2e6;
+    --bs-pagination-border-radius: 0.375rem;
+    --bs-pagination-hover-color: #151515;
+    --bs-pagination-hover-bg: #e9ecef;
+    --bs-pagination-hover-border-color: #dee2e6;
+    --bs-pagination-focus-color: var(--bs-link-hover-color);
+    --bs-pagination-focus-bg: #e9ecef;
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    --bs-pagination-active-color: #000;
+    --bs-pagination-active-bg: #fff;
+    --bs-pagination-active-border-color: #fff;
+    --bs-pagination-disabled-color: #fff;
+    --bs-pagination-disabled-bg: #151515;
+    --bs-pagination-disabled-border-color: #fff;
+  }
 
 //----------------------------Show-----------------------------
 .showPage{

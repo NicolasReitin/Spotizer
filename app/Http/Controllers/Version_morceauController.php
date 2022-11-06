@@ -25,7 +25,7 @@ class Version_morceauController extends Controller
     public function index()
     {
         //renvoi vers la page index avec tous les titres récupérés de la bdd dans la function $titres
-        $titres = Version_morceau::with('intervientArtiste')->with('intervientArtiste.membreGroupes')->inRandomOrder()->get();
+        $titres = Version_morceau::with('intervientArtiste')->with('intervientArtiste.membreGroupes')->inRandomOrder()->paginate(20);
         return view('titres.index', compact('titres'));
     }
 
