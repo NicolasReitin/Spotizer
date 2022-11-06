@@ -20,8 +20,5 @@ class TagSeeder extends Seeder
         return Tag::factory()
             ->count(5)
             ->create();
-        // DB::table('tags')->insert([
-        //     'name'=>Str::random(10)
-        // ]);
     }
 }
