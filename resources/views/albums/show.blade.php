@@ -48,29 +48,27 @@
                                 <th scope="col" class="hashtagThead">#</th>
                                 <th scope="col" class="titleTableThead">Titre</th>
                                 <th scope="col" class="dureeTableThead">Durée</th>
-                                <th scope="col" class=""></th>
+                                <th scope="col" class="playTableThead"></th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
                             @foreach ($album->appartientVersion_morceaus as $titre)
                             <tr>
-                                <th scope="row">{{ $titre->appartientAlbums->first()->pivot->numero_piste }}</th>
-                                <td>
-                            <div class="titleTableTbody d-flex gap-3 mt-3">
-                                <img src="
-                                    @if($titre->appartientAlbums->count() !== 0)
-                                        {{ $titre->appartientAlbums[0]->cover}}
-                                    @else
-                                        'N.C'
-                                    @endif
-                                " alt="cover">
-                                <div>
-                                    <b><a href="{{ route('titres.show', ['titre' => $titre]) }}" style="color: whitesmoke">{{ $titre->titre }}</a></b>
-                                    <br><a href="{{ route('groupes.show', ['groupe' =>$titre->appartientAlbums()->first()?->produitGroupes()?->first()->id ]) }}"><span>{{ $titre->appartientAlbums()->first()?->produitGroupes()?->first()->name ?? 'N.C' }}</span></a>                           
-                                </div>
-                            </div>
-                        </td>
-                                <td>{{ gmdate("i:s", $titre->duree_secondes) }}</td>
+                                <th class="hashtagTbody" scope="row">{{ $titre->appartientAlbums->first()->pivot->numero_piste }}</th>
+                                <td class="titleTableTbody d-flex gap-3 mt-3">
+                                    <img src="
+                                        @if($titre->appartientAlbums->count() !== 0)
+                                            {{ $titre->appartientAlbums[0]->cover}}
+                                        @else
+                                            'N.C'
+                                        @endif
+                                    " alt="cover">
+                                    <div>
+                                        <b><a href="{{ route('titres.show', ['titre' => $titre]) }}" style="color: whitesmoke">{{ $titre->titre }}</a></b>
+                                        <br><a href="{{ route('groupes.show', ['groupe' =>$titre->appartientAlbums()->first()?->produitGroupes()?->first()->id ]) }}"><span>{{ $titre->appartientAlbums()->first()?->produitGroupes()?->first()->name ?? 'N.C' }}</span></a>                           
+                                    </div>
+                                </td>
+                                <td class="dureeTableTbody">{{ gmdate("i:s", $titre->duree_secondes) }}</td>
                                 <td>
                                     <div >
                                         <img id="btnPlay" class="buttonPlay" src="{{ asset('assets/icones/Play.png') }}" alt="Play"> 

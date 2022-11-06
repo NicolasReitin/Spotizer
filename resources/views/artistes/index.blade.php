@@ -20,10 +20,10 @@
                 <div class="card cardHover">
                     <div class="imageCard">
                         <img class="photoCircle" src="
-                        @if ($artiste->photo )
+                        @if (isset($artiste->photo) )
                             {{ $artiste->photo }}
-                        @else
-                            {{ Storage::url($artiste->upload) }}
+                        @else 
+                            {{ asset('storage/'.$artiste->upload) }}
                         @endif
                         " alt="Photo de {{ $artiste->pseudo }}">
                     </div>

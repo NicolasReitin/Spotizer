@@ -16,13 +16,13 @@
                             <th scope="col" class="titleTableThead">Titre</th>
                             <th scope="col" class="albumTableThead">Album</th>
                             <th scope="col" class="dureeTableThead">Durée</th>
-                            <th></th>
+                            <th class="playTableThead"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($titresGenres as $titre)
                             <tr>
-                                <td scope="row">{{$loop->iteration}}</td> <!--  -->
+                                <td class="hashtagTbody" scope="row">{{$loop->iteration}}</td> <!--  -->
                                 <td>
                                     <div class="titleTableTbody d-flex gap-3 mt-3">
                                         <img src="
@@ -40,14 +40,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="titleTableTbody">
+                                <td class="albumTableTbody">
                                     @if($titre->appartientAlbums->count() !== 0) 
                                     <a href="{{ route('albums.show', ['album' => $titre->appartientAlbums->first()->id]) }}" style="color: whitesmoke">{{ $titre->appartientAlbums->first()->titre}}</a>
                                     @else
                                         N.C
                                     @endif
                                 </td>
-                                <td>{{ gmdate("i:s", $titre->duree_secondes) }}</td>
+                                <td class="dureeTableTbody">{{ gmdate("i:s", $titre->duree_secondes) }}</td>
                                 <td>
                                     <div >
                                         <img id="btnPlay" class="buttonPlay" src="{{ asset('assets/icones/Play.png') }}" alt="Play"> 

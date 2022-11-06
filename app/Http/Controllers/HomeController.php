@@ -25,9 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $titres = Version_morceau::with('intervientArtiste')->with('intervientArtiste.membreGroupes')->inRandomOrder()->get(); //récupère tous les titres de la BDD dans une fonction avec une association des tables artiste et groupe via les fonctions présentes dans les models
-        return view('titres.index', compact('titres')); //renvoi vers la page index avec la fonction $titres
+        // $titres = Version_morceau::with('intervientArtiste')->with('intervientArtiste.membreGroupes')->inRandomOrder()->get(); //récupère tous les titres de la BDD dans une fonction avec une association des tables artiste et groupe via les fonctions présentes dans les models
+        // return view('titres.index', compact('titres')); //renvoi vers la page index avec la fonction $titres
         
-        // return view('home');
+        return view('home');
     }
 }

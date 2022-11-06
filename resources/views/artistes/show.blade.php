@@ -63,15 +63,15 @@
                         <tr>
                             <th scope="col" class="hashtagThead">#</th>
                             <th scope="col" class="titleTableThead">Titre</th>
-                            <th scope="col" class="titleTableThead">Album</th>
+                            <th scope="col" class="albumTableThead">Album</th>
                             <th scope="col" class="dureeTableThead">Durée</th>
-                            <th scope="col" class=""></th>
+                            <th scope="col" class="playTableThead"></th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
                         @foreach ($titres as $titre)
                         <tr>
-                            <th scope="row">{{$loop->iteration}}</th>
+                            <th class="hashtagTbody" scope="row">{{$loop->iteration}}</th>
                             <td>
                         <div class="titleTableTbody d-flex gap-3 mt-3">
                             <img src="
@@ -91,14 +91,14 @@
                             </div>
                         </div>
                     </td>
-                    <td>
+                    <td class="albumTableTbody">
                         @if($titre->appartientAlbums->count() !== 0)
                             {{ $titre->appartientAlbums->first()->titre}}
                         @else
                             N.C
                         @endif
                     </td>
-                            <td>{{ gmdate("i:s", $titre->duree_secondes) }}</td>
+                            <td class="dureeTableTbody">{{ gmdate("i:s", $titre->duree_secondes) }}</td>
                             <td>
                                 <div >
                                     <img id="btnPlay" class="buttonPlay" src="{{ asset('assets/icones/Play.png') }}" alt="Play"> 

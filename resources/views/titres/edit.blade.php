@@ -24,7 +24,6 @@
                         @else
                         <option value="" selected>Choisissez l'album ou créer un nouvel album =>></option>
                         @endif
-
                         @foreach ( $albums as $album )
                             <option value="{{ $album->id }}">{{ $album->titre }}</option>
                         @endforeach

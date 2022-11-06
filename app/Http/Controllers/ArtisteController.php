@@ -19,7 +19,7 @@ class ArtisteController extends Controller
      */
     public function index()
     {
-        return view('artistes.index', ['artistes' => Artiste::all()] ); //renvoi vers la page index avec tous les artistes récupérés de la bdd dans la function $artiste
+        return view('artistes.index', ['artistes' => Artiste::inRandomOrder()->get()] ); //renvoi vers la page index avec tous les artistes récupérés de la bdd dans la function $artiste
     }
 
     /**

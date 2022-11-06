@@ -4,7 +4,6 @@ use App\Models\User;
 use App\Models\Version_morceau;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\GenreController;

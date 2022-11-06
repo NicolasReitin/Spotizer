@@ -26,12 +26,12 @@
                     <div class="navMenuLeft">
                         <a href="{{ url('/') }}"><img class="logo ms-5" src="{{ asset('assets/images/logo.png') }}" alt="logo spotizer"></a> 
                         <ul>
+                            <li><a href="{{ route('titres.index') }}">Titres</a></li>
                             <li><a href="{{ route('albums.index') }}">Albums</a></li>
                             <li><a href="{{ route('artistes.index') }}">Artistes</a></li>
                             <li><a href="{{ route('groupes.index') }}">Groupes</a></li>
-                            <li><a href="{{ route('titres.index') }}">Titres</a></li>
                             <li><a href="{{ route('genres.index') }}">Genres</a></li> 
-                            <li><a href="">Playlist</a></li>
+                            {{-- <li><a href="">Playlists</a></li> --}}
                         </ul>
                     </div>
 

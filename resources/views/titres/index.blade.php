@@ -21,17 +21,16 @@
                     <th scope="col" class="titleTableThead">Titre</th>
                     <th scope="col" class="albumTableThead">Album</th>
                     <th scope="col" class="dureeTableThead">Durée</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th class="playTableThead"></th>
+                    <th class="editTableThead"></th>
+                    <th class="deleteTableThead"></th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
                 @foreach ($titres as $titre)
-                <tr>
-                    <th scope="row">{{$loop->iteration}}</th>
-                    <td>
-                        <div class="titleTableTbody d-flex gap-3 mt-3">
+                
+                    <th class="hashtagTbody" scope="row">{{$loop->iteration}}</th>
+                    <td class="titleTableTbody d-flex gap-3 mt-3">
                             <img src="
                                 @if($titre->appartientAlbums->count() !== 0)
                                     {{ $titre->appartientAlbums[0]->cover}}
@@ -45,16 +44,15 @@
                                 <br><a href="{{ route('groupes.show', ['groupe' => $titre->appartientAlbums()->first()?->produitGroupes()?->first()->id ]) }}" style="color: whitesmoke"><span>{{ $titre->appartientAlbums()->first()?->produitGroupes()?->first()->name ?? 'N.C' }}</span></a>      
                                 @endif                     
                             </div>
-                        </div>
                     </td>
-                    <td class="titleTableTbody">
+                    <td class="albumTableTbody">
                         @if($titre->appartientAlbums->count() !== 0) 
                         <a href="{{ route('albums.show', ['album' => $titre->appartientAlbums->first()->id]) }}" style="color: whitesmoke">{{ $titre->appartientAlbums->first()->titre}}</a>
                         @else
                             N.C
                         @endif
                     </td>
-                    <td>{{ gmdate("i:s", $titre->duree_secondes) }}</td>
+                    <td class="dureeTableTbody">{{ gmdate("i:s", $titre->duree_secondes) }}</td>
 
                     <td>
                         <div >
@@ -67,10 +65,10 @@
                     </td>
                     @auth
                         @if (Auth::user()->role === 'admin')
-                        <td>
+                        <td class="editTableTbody">
                             <a href="{{ route('titres.edit', ['titre' => $titre]) }}"><button class="btn btn-outline-light ">Edit</button></a>
                         </td>
-                        <td>
+                        <td class="deleteTableTbody">
                             <form action="{{ route('titres.delete', ['titre' => $titre]) }}" method="POST">
                                 @method('DELETE')
                                 @csrf

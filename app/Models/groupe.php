@@ -18,10 +18,10 @@ class groupe extends Model
     }
 
     public function albumsGenres() { // association N/N avec table genre_groupes
-        return $this->belongsToMany(Genre::class, 'genre_groupe', 'groupe_id', 'genre_id')->withPivot('id');
+        return $this->belongsToMany(Genre::class, 'genre_groupe', 'groupe_id', 'genre_id');
     }
 
     public function membreArtistes() { // association N/N avec table artistes
-        return $this->belongsToMany(Artiste::class, 'est_membres', 'groupe_id', 'artiste_id')->withPivot('id');
+        return $this->belongsToMany(Artiste::class, 'est_membres', 'groupe_id', 'artiste_id');
     }
 }
