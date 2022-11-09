@@ -16,7 +16,7 @@ class AdminTitreController extends Controller
      */
     public function index()
     {
-        $titres = DB::table('version_morceaus')->paginate(25); // paginate sur la table artistes 
+        $titres = DB::table('version_morceaus')->paginate(20); // paginate sur la table artistes 
         return view('auth/Dashboard_Admin/Titres/index', compact('titres')); //afficher la view index titres du dashboard admin
     }
 

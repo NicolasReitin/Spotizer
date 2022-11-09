@@ -32,22 +32,8 @@ nav{
     .navMenuLeft{
         display: flex;
     }
-    // ul{
-    //     list-style-type: none;
-    //     display: flex;
-    // }
     a{
         z-index: 50;
-        // text-decoration: none;
-        // color: whitesmoke;
-        // font-size: 25px;
-        // margin-right: 20px;
-
-        // &:hover{
-        //     color: white;
-        //     text-decoration: underline;
-        //     font-weight: bold;
-        // }
     }
     .navMenuRight{
         z-index: 50;
@@ -510,7 +496,6 @@ footer ion-icon:hover {
             }
         }
     }
-
     .navMenuRight{
         a{
             font-size: 16px !important;
@@ -530,7 +515,6 @@ footer ion-icon:hover {
             display: none;
         }
     }
-
     .searchbar{
         margin: auto;
         .searchBarInput{
@@ -574,7 +558,6 @@ footer ion-icon:hover {
             display: none;
         }
     }
-
     .blocArtiste {
         h3{
             text-align: center !important;
@@ -597,8 +580,6 @@ footer ion-icon:hover {
             text-align: center;
         }
     }
-    
-
     .artisteTable{
         margin: auto;
         .dureeTableTbody, .hashtagThead, .dureeTableThead{
@@ -611,7 +592,6 @@ footer ion-icon:hover {
             width: 250px;
         }
     }
-
     .searchbar{
         form{
             display: block !important;
@@ -624,5 +604,4 @@ footer ion-icon:hover {
             }
         }
     }
-
 }

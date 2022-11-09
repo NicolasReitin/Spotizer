@@ -51,8 +51,10 @@
                 </tbody>
             </table>
 
-            <div class="paginate">
-                {!! $artistes->links() !!} 
+            <div class="imageCentral mt-4">
+                <div class="paginate">
+                    {{ $artistes->links() }} 
+                </div>
             </div>
         </div>
     </div>

@@ -47,8 +47,10 @@
                 </tbody>
             </table>
 
-            <div class="paginate">
-                {!! $groupes->links() !!} 
+            <div class="imageCentral mt-4">
+                <div class="paginate">
+                    {{ $groupes->links() }} 
+                </div>
             </div>
         </div>
     </div>
